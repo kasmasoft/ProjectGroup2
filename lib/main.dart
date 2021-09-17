@@ -1,18 +1,26 @@
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'login_screen.dart';
+import 'screens/login_screen.dart';
 
-
-void main() => runApp(MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  const MyApp({ Key? key }) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Prayer Time App',
-      theme: new ThemeData(
-        primaryColor: Colors.cyan.shade300
+      theme: ThemeData(
+        primaryColor: Color(0xFF37b89a),
+        primarySwatch: Colors.green,
+        accentColor: Color(0xFFD8ECF1),
+        scaffoldBackgroundColor: Color(0xFFffffff),
       ),
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
@@ -21,7 +29,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({ Key? key }) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -36,3 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+// command 
+// --no-sound-null-safety
