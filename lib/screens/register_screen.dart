@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'Home_screen.dart';
 import '../net/flutterfire.dart';
-import 'login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -14,9 +13,9 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _registerFormKey = GlobalKey<FormState>();
-  final _focusName = FocusNode();
-  final _focusEmail = FocusNode();
-  final _focusPassword = FocusNode();
+  // final _focusName = FocusNode();
+  // final _focusEmail = FocusNode();
+  // final _focusPassword = FocusNode();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -89,6 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     _isProcessing? CircularProgressIndicator():
                     Container(
                         height: 50,
+                        width: 400,
                         padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: ElevatedButton(
                           child: Text('Sign Up'),
@@ -126,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Container(
                         child: Row(
                       children: <Widget>[
-                        Text('have an account?'),
+                        Text('Allready have an account?'),
                         TextButton(
                           child: Text(
                             'login',

@@ -41,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.home,
                 size: 30,
               ),
+              // ignore: deprecated_member_use
               title: SizedBox.shrink(),
               activeIcon: Icon(
                 Icons.home,
@@ -53,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.calendar_today,
                 size: 30,
               ),
+              // ignore: deprecated_member_use
               title: SizedBox.shrink(),
               activeIcon: Icon(
                 Icons.calendar_today,
@@ -65,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.task_alt_outlined,
                 size: 30,
               ),
+              // ignore: deprecated_member_use
               title: SizedBox.shrink(),
               activeIcon: Icon(
                 Icons.task_alt_outlined,
@@ -92,6 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   size: 30,
                 ),
               ),
+              // ignore: deprecated_member_use
               title: SizedBox.shrink(),
               activeIcon: Icon(
                 Icons.more_horiz_outlined,

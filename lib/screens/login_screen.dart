@@ -81,10 +81,11 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: 20.0,
+                          height: 10.0,
                         ),
                         Container(
                             height: 50,
+                            width: 400,
                             padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                             child: ElevatedButton(
                               child: Text('Login'),

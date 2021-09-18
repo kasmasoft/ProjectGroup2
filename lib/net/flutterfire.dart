@@ -44,7 +44,7 @@ class FireAuth {
         password: password,
       );
       user = userCredential.user;
-      await user!.updateProfile(displayName: name);
+      await user.updateProfile(displayName: name);
       await user.reload();
       user = auth.currentUser;
     } on FirebaseAuthException catch (e) {
