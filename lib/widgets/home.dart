@@ -8,7 +8,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  @override
   int _selectedDay = 0;
   List<String> _days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -53,6 +52,7 @@ class _HomeState extends State<Home> {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: ListView(

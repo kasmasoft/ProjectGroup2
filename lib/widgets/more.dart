@@ -8,7 +8,7 @@ class More extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
                 child: Text(
                   "More",
                   style: TextStyle(
@@ -131,7 +131,7 @@ class More extends StatelessWidget {
                                   height: 10.0,
                                 ),
                                 Text(
-                                  "Halal Food     Search",
+                                  "Halal Food",
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
@@ -173,7 +173,7 @@ class More extends StatelessWidget {
                                   height: 10.0,
                                 ),
                                 Text(
-                                  "Local Mosque Search",
+                                  "Local Mosque",
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.bold,
@@ -202,3 +202,9 @@ class More extends StatelessWidget {
     );
   }
 }
+
+
+// Icons.checklist_rtl_sharp
+// Icons.check_box
+// Icons.search
+// Icons.location_searching_rounded

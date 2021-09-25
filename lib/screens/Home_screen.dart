@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Home(),
     Calendar(),
     Prayers(),
-    Home(),
+    More(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -76,24 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             BottomNavigationBarItem(
-              icon: GestureDetector(
-                onTap: () {
-                  showModalBottomSheet(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(30),
-                      ),
-                    ),
-                    context: context,
-                    builder: (context) {
-                      return More();
-                    }
-                  );
-                },
-                child: Icon(
-                  Icons.more_horiz_outlined,
-                  size: 30,
-                ),
+              icon: Icon(
+                Icons.more_horiz_outlined,
+                size: 30,
               ),
               // ignore: deprecated_member_use
               title: SizedBox.shrink(),

@@ -1,10 +1,12 @@
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_auth/firebase_auth.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:prayer_time_application/screens/forgot_password.dart';
 import 'package:prayer_time_application/screens/register_screen.dart';
 import 'Home_screen.dart';
 import '../net/flutterfire.dart';
-import 'login_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   Future<FirebaseApp> _initializeFirebase() async {
@@ -70,7 +72,9 @@ class LoginScreen extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            //forgot password screen
+                            Navigator.of(context)
+                              .pushReplacement(
+                                MaterialPageRoute(builder: (context) => ForgotPassword()));
                           },
                           child: Text(
                             'Forgot Password?',
@@ -87,26 +91,30 @@ class LoginScreen extends StatelessWidget {
                             height: 50,
                             width: 400,
                             padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: ElevatedButton(
-                              child: Text('Login'),
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  User? user = await FireAuth.signInUsingEmailPassword(
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                    context: context,
-                                  );
-                                  if (user != null) {
-                                    Navigator.of(context)
-                                        .pushReplacement(
-                                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                            child: SizedBox(
+                              child: TextButton(
+                                style: TextButton.styleFrom(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                  primary: Colors.white,
+                                  backgroundColor: Theme.of(context).primaryColor,
+                                ),
+                                child: Text('Login'),
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    User? user = await FireAuth.signInUsingEmailPassword(
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                      context: context,
                                     );
+                                    if (user != null) {
+                                      Navigator.of(context)
+                                          .pushReplacement(
+                                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                                      );
+                                    }
                                   }
-                                }
-                              },
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Color(0xFF37b89a))),
+                                },
+                              ),
                             )),
                         Container(
                             child: Row(
@@ -120,7 +128,7 @@ class LoginScreen extends StatelessWidget {
                                     color: Theme.of(context).primaryColor),
                               ),
                               onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => RegisterScreen()));
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RegisterScreen()));
                               },
                             )
                           ],
