@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:prayer_time_application/net/validator.dart';
 
 class ForgotPassword extends StatelessWidget {
+  static String routeName = "/forgot";
   final _forgotformKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
 

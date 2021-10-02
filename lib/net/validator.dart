@@ -33,10 +33,20 @@ class Validator {
     if (password == null) {
       return null;
     }
+
+    RegExp passwordRegExp = RegExp(
+        r"^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$");
+
+    RegExp capitalLetter = RegExp(r"[A-Z]+");
+
     if (password.isEmpty) {
       return 'Password can\'t be empty';
-    } else if (password.length < 6) {
-      return 'Enter a password with length at least 6';
+    } else if (password.length < 8) {
+      return 'Enter a password with length at least 8';
+    } else if (!passwordRegExp.hasMatch(password)) {
+      return 'Password must contain atleast one alphabet, one number and one special character';
+    } else if (!capitalLetter.hasMatch(password)) {
+      return 'Password must contain one capital letter';
     }
 
     return null;

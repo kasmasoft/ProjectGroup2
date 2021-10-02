@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class More extends StatelessWidget {
+  static String routeName = "/more";
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

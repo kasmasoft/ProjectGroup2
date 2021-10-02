@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hijri/hijri_calendar.dart';
+import 'package:intl/intl.dart';
+import 'package:prayer_time_application/helpers/prayerTimes.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,6 +13,19 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedDay = 0;
   List<String> _days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var _format = HijriCalendar.now();
+  String ggdt = DateFormat('EEEE, dd MMM').format(DateTime.now());
+
+  @override
+  void initState() {
+    getPrayerTimes();
+    super.initState();
+  }
+
+  void getCurrentPrayer() {
+    Map<String, String> curPrayers = prayers;
+    print(curPrayers);
+  }
 
   Widget _buildIcon(int index) {
     return GestureDetector(
@@ -39,9 +55,7 @@ class _HomeState extends State<Home> {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.w500,
-                    color:  _selectedDay == index
-                        ? Colors.white
-                        : Colors.black,
+                    color: _selectedDay == index ? Colors.white : Colors.black,
                   ),
                 ),
               ),
@@ -63,22 +77,25 @@ class _HomeState extends State<Home> {
               height: 20.0,
             ),
             Text(
-              "Tue, 14 sept",
+              ggdt,
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              "7 Safar 1443 AH",
+              _format.toFormat("dd MMMM yyyy "),
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.black45,
               ),
-            )
+            ),
+            // )
           ],
         ),
-        SizedBox(height: 20.0,),
+        SizedBox(
+          height: 20.0,
+        ),
         Padding(
           padding: EdgeInsets.only(left: 30, right: 30),
           child: Stack(
@@ -172,7 +189,9 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-        SizedBox(height: 20.0,),
+        SizedBox(
+          height: 20.0,
+        ),
         Container(
           height: 80,
           child: ListView.builder(

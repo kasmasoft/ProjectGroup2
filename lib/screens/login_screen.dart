@@ -1,7 +1,6 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_auth/firebase_auth.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:prayer_time_application/screens/forgot_password.dart';
 import 'package:prayer_time_application/screens/register_screen.dart';
@@ -9,10 +8,7 @@ import 'Home_screen.dart';
 import '../net/flutterfire.dart';
 
 class LoginScreen extends StatelessWidget {
-  Future<FirebaseApp> _initializeFirebase() async {
-    FirebaseApp firebaseApp = await Firebase.initializeApp();
-    return firebaseApp;
-  }
+  static String routeName = "/login";
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -22,11 +18,7 @@ class LoginScreen extends StatelessWidget {
 
     final _size = MediaQuery.of(context).size;
     return Scaffold(
-      body: FutureBuilder(
-      future: _initializeFirebase(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done){
-          return Container(
+      body: Container(
           height: _size.height,
           width: _size.width,
           child: Padding(
@@ -72,9 +64,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context)
-                              .pushReplacement(
-                                MaterialPageRoute(builder: (context) => ForgotPassword()));
+                            Navigator.pushNamed(context, ForgotPassword.routeName);
                           },
                           child: Text(
                             'Forgot Password?',
@@ -107,10 +97,7 @@ class LoginScreen extends StatelessWidget {
                                       context: context,
                                     );
                                     if (user != null) {
-                                      Navigator.of(context)
-                                          .pushReplacement(
-                                        MaterialPageRoute(builder: (context) => HomeScreen()),
-                                      );
+                                      Navigator.pushNamed(context, HomeScreen.routeName);
                                     }
                                   }
                                 },
@@ -128,7 +115,7 @@ class LoginScreen extends StatelessWidget {
                                     color: Theme.of(context).primaryColor),
                               ),
                               onPressed: () {
-                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => RegisterScreen()));
+                                Navigator.pushNamed(context, RegisterScreen.routeName);
                               },
                             )
                           ],
@@ -139,12 +126,6 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ],
               )),
-        );
-        }
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    ));
+        ));
   }
 }

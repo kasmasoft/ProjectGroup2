@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'prayers.dart';
 import 'calendar.dart';
 import '../widgets/home.dart';
-import '../widgets/more.dart';
+import 'more.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  static String routeName = "/";
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }

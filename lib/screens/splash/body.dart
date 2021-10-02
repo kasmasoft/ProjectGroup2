@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:prayer_time_application/screens/Home_screen.dart';
 import 'package:prayer_time_application/screens/login_screen.dart';
 import 'size_config.dart';
 import 'constants.dart';
@@ -65,7 +67,12 @@ class _BodyState extends State<Body> {
                     DefaultButton(
                       text: "Continue",
                       press: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginScreen()));
+                        FirebaseAuth.instance.authStateChanges().listen((User? user) {
+                          if (user == null)
+                            Navigator.pushNamed(context, LoginScreen.routeName);
+                          else
+                            Navigator.pushNamed(context, HomeScreen.routeName);
+                        });
                       },
                     ),
                     Spacer(),

@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class FireAuth {
   static Future<User?> registerUsingEmailPassword({
-    required String name,
+    required String firstName,
+    required String lastName,
     required String email,
     required String password,
   }) async {
@@ -17,7 +18,7 @@ class FireAuth {
       );
       user = userCredential.user;
       // ignore: deprecated_member_use
-      await user!.updateProfile(displayName: name);
+      await user!.updateProfile(displayName: firstName+ " " + lastName);
       await user.reload();
       user = auth.currentUser;
     } on FirebaseAuthException catch (e) {

@@ -10,6 +10,7 @@ import '../net/flutterfire.dart';
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
+  static String routeName = "/register";
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
@@ -22,7 +23,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: ListView(
             children: <Widget>[
               Container(
-                  height: 150,
+                  height: 100,
                   alignment: Alignment.center,
                   padding: EdgeInsets.all(10),
                   child: Text(
@@ -53,10 +55,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Container(
                         padding: EdgeInsets.all(10),
                         child: TextFormField(
-                          controller: nameController,
+                          controller: firstNameController,
                           decoration: new InputDecoration(
                             border: new OutlineInputBorder(),
-                            labelText: 'Name',
+                            labelText: 'Firsl Name',
+                          ),
+                          validator: (value) =>
+                              Validator.validateName(name: value.toString()),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        child: TextFormField(
+                          controller: lastNameController,
+                          decoration: new InputDecoration(
+                            border: new OutlineInputBorder(),
+                            labelText: 'Last Name',
                           ),
                           validator: (value) =>
                               Validator.validateName(name: value.toString()),
@@ -101,7 +115,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               return 'Password can\'t be empty!';
                             }
                             // ignore: unrelated_type_equality_checks
-                            if (passwordController.text != confirmPasswordController.text) {
+                            if (passwordController.text !=
+                                confirmPasswordController.text) {
                               return 'doesn\'t match above password!';
                             }
                           },
@@ -119,26 +134,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             height: 56,
                             child: TextButton(
                               style: TextButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                              primary: Colors.white,
-                              backgroundColor: Theme.of(context).primaryColor,
-                            ),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                primary: Colors.white,
+                                backgroundColor: Theme.of(context).primaryColor,
+                              ),
                               child: Text('Sign Up'),
                               onPressed: () async {
                                 if (_registerFormKey.currentState!.validate()) {
                                   User? user =
                                       await FireAuth.registerUsingEmailPassword(
-                                    name: nameController.text,
+                                    firstName: firstNameController.text,
+                                    lastName: lastNameController.text,
                                     email: emailController.text,
                                     password: passwordController.text,
                                   );
                                   if (user != null) {
-                                    Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                        builder: (context) => HomeScreen(),
-                                      ),
-                                      ModalRoute.withName('/'),
-                                    );
+                                    Navigator.pushNamed(context, HomeScreen.routeName);
                                   }
                                 }
                               },
@@ -156,7 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   color: Theme.of(context).primaryColor),
                             ),
                             onPressed: () {
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                              Navigator.pushNamed(context, LoginScreen.routeName);
                             },
                           )
                         ],
