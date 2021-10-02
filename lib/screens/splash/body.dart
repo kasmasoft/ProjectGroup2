@@ -5,7 +5,6 @@ import 'package:prayer_time_application/screens/login_screen.dart';
 import 'size_config.dart';
 import 'constants.dart';
 import 'splash_content.dart';
-
 import 'default_button.dart';
 
 class Body extends StatefulWidget {
@@ -16,14 +15,14 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
-    {"text": "Welcome to our App!", "image": "assets/images/greenmosq.png"},
+    {"text": "Welcome to our App!", "image": "assets/images/splash1.png"},
     {
       "text": "We help you know prayer time",
-      "image": "assets/images/clock.jpg"
+      "image": "assets/images/splash2.png"
     },
     {
       "text": "We help you to track your prayers",
-      "image": "assets/images/checklist.png"
+      "image": "assets/images/splash3.png"
     },
   ];
   @override
