@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'prayers.dart';
-import 'calendar.dart';
-import '../widgets/home.dart';
-import 'more.dart';
+import '../prayers/prayers.dart';
+import '../calendar/calendar.dart';
+import 'widgets/home.dart';
+import '../more/more.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
-import '/screens/calendar.dart';
-import '/screens/forgot_password.dart';
-import '/screens/prayers.dart';
-import '/screens/profile.dart';
-import '/screens/Home_screen.dart';
-import '/screens/more.dart';
-import '/screens/register_screen.dart';
-import '/screens/login_screen.dart';
+import 'screens/calendar/calendar.dart';
+import 'screens/forgot/forgot_password.dart';
+import 'screens/prayers/prayers.dart';
+import 'screens/profile/profile.dart';
+import 'screens/home/Home_screen.dart';
+import 'screens/more/more.dart';
+import 'screens/register/register_screen.dart';
+import 'screens/login/login_screen.dart';
 
 import '/screens/splash/splash_screen.dart';
 

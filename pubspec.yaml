@@ -23,6 +23,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # others
+  circular_bottom_navigation: ^1.0.1
+
+  # date  
   intl: ^0.17.0
   hijri: ^3.0.0
 
@@ -41,6 +46,7 @@ dependencies:
   location: ^4.3.0
   # geolocator: ^5.3.1
   geolocator: ^5.3.1
+  geocoding: ^2.0.1
 
 dev_dependencies:
   flutter_test:

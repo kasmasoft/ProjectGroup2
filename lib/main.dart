@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Prayer Time App',
       theme: ThemeData(
-        primaryColor: Color(0xFF7639c3),
+        primaryColor: Color(0xFF492191),
         primarySwatch: Colors.purple,
         accentColor: Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Color(0xFFffffff),

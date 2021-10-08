@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// ignore: import_of_legacy_library_into_null_safe
 import 'package:geolocator/geolocator.dart';
 
 class LocationScreen extends StatefulWidget {
@@ -42,7 +41,7 @@ class _LocationScreenState extends State<LocationScreen> {
 
       setState(() {
         _currentAddress =
-            "${place.locality}, ${place.postalCode}, ${place.country}";
+            "${place.locality}, ${place.country}";
       });
     } catch (e) {
       print(e);
@@ -51,12 +50,15 @@ class _LocationScreenState extends State<LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      _currentAddress.toString(),
-      style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w500,
-          fontSize: 30),
+    return Container(
+      child: (_currentPosition != null && _currentAddress != null)?
+        Text(
+          _currentAddress.toString(),
+          style: TextStyle(
+              color: Colors.blue,
+              fontWeight: FontWeight.w500,
+              fontSize: 30),
+        ): SizedBox(),
     );
   }
 }

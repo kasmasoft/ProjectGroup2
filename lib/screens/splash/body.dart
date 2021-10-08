@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:prayer_time_application/screens/Home_screen.dart';
-import 'package:prayer_time_application/screens/login_screen.dart';
+import 'package:prayer_time_application/screens/home/Home_screen.dart';
+import 'package:prayer_time_application/screens/login/login_screen.dart';
 import 'size_config.dart';
 import 'constants.dart';
 import 'splash_content.dart';

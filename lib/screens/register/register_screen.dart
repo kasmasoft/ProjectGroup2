@@ -2,10 +2,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter/material.dart';
-import 'package:prayer_time_application/screens/login_screen.dart';
-import '../net/validator.dart';
-import 'Home_screen.dart';
-import '../net/flutterfire.dart';
+import 'package:prayer_time_application/screens/login/login_screen.dart';
+import '../../net/validator.dart';
+import '../home/Home_screen.dart';
+import '../../net/flutterfire.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
