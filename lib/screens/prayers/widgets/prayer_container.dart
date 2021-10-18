@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class prayerContainer extends StatefulWidget {
+class PrayerContainer extends StatefulWidget {
   final String name;
   final String time;
 
-  prayerContainer(this.name, this.time);
+  PrayerContainer(this.name, this.time);
 
   @override
-  _prayerContainerState createState() => _prayerContainerState();
+  _PrayerContainerState createState() => _PrayerContainerState();
 }
 
-class _prayerContainerState extends State<prayerContainer> {
+class _PrayerContainerState extends State<PrayerContainer> {
   int currentToggleIndex = 0;
 
   List<Widget> _toggleList = [
@@ -58,6 +58,3 @@ class _prayerContainerState extends State<prayerContainer> {
     );
   }
 }
-
-// Widget prayerContainer(String name, String time) {
-

@@ -1,8 +1,7 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
-
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:adhan/adhan.dart';
+import 'package:prayer_time_application/helpers/notifications.dart';
+import 'package:prayer_time_application/helpers/prayerTimes.dart';
 import 'prayer_container.dart';
 import 'icon_text.dart';
 import 'date_picker.dart';
@@ -13,20 +12,10 @@ class Adzan extends StatefulWidget {
 }
 
 class _AdzanState extends State<Adzan> {
-  late PrayerTimes prayerTimes;
-  final Color color1 = Color(0xFF8000e8);
+  final Color color1 = Color(0xFFc585f7);
   final Color color2 = Color(0xFFFFFFFF);
   final Color color3 = Color(0xFF8133d4);
-
-  @override
-  void initState() {
-    prayerTimes = PrayerTimes(
-        Coordinates(19.29209743677179, 72.85928629201034),
-        DateComponents.from(DateTime.now()),
-        CalculationMethod.karachi.getParameters());
-    super.initState();
-  }
-
+  Map<String, String> prayers = getPrayerTimes();
 
   @override
   Widget build(BuildContext context) {
@@ -59,29 +48,35 @@ class _AdzanState extends State<Adzan> {
           SizedBox(
             height: 25,
           ),
-          prayerContainer("Fajr", DateFormat.jm().format(prayerTimes.fajr)),
+          GestureDetector(
+              onTap: () {
+                scheduleNotification();
+              },
+              child: Icon(Icons.notification_add, color: Colors.white)),
+          SizedBox(
+            height: 25,
+          ),
+          PrayerContainer("Fajr", prayers['fajr'].toString()),
           SizedBox(
             height: 15,
           ),
-          prayerContainer(
-              "Sunrise", DateFormat.jm().format(prayerTimes.sunrise)),
+          PrayerContainer("Sunrise", prayers['sunrise'].toString()),
           SizedBox(
             height: 15,
           ),
-          prayerContainer("Dhuhr", DateFormat.jm().format(prayerTimes.dhuhr)),
+          PrayerContainer("Dhuhr", prayers['dhuhr'].toString()),
           SizedBox(
             height: 15,
           ),
-          prayerContainer("Asr", DateFormat.jm().format(prayerTimes.asr)),
+          PrayerContainer("Asr", prayers['asr'].toString()),
           SizedBox(
             height: 15,
           ),
-          prayerContainer(
-              "Maghrib", DateFormat.jm().format(prayerTimes.maghrib)),
+          PrayerContainer("Maghrib", prayers['maghrib'].toString()),
           SizedBox(
             height: 15,
           ),
-          prayerContainer("Isha", DateFormat.jm().format(prayerTimes.isha)),
+          PrayerContainer("Isha", prayers['isha'].toString()),
           SizedBox(
             height: 25,
           ),
