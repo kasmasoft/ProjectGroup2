@@ -43,9 +43,8 @@ dependencies:
   adhan: ^1.1.16
 
   # location
-  location: ^4.3.0
-  # geolocator: ^5.3.1
-  geolocator: ^5.3.1
+  geolocator: ^7.7.0
+  geocoding: ^2.0.1
 
   #push notification
   flutter_native_timezone: ^2.0.0

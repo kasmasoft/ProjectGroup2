@@ -49,7 +49,10 @@ Duration getNextPrayerCounter(nextPrayer) {
   else if(nextPrayer == 'maghrib') {
     return prayers.maghrib.difference(DateTime.now());
   }
-  else {
+  else if(nextPrayer == 'isha') {
     return prayers.isha.difference(DateTime.now());
+  }
+  else {
+    return -(prayers.isha.difference(DateTime.now()));
   }
 }

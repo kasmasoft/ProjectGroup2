@@ -16,9 +16,9 @@ void main() async {
       AndroidInitializationSettings('app_logo');
   final IOSInitializationSettings initializationSettingsIOS =
       IOSInitializationSettings(
-          requestSoundPermission: false,
+          requestSoundPermission: true,
           requestBadgePermission: false,
-          requestAlertPermission: false);
+          requestAlertPermission: true);
   final InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Prayer Time App',
       theme: ThemeData(
-        primaryColor: Color(0xFF492191),
+        primaryColor: Color(0xFFc585f7),
         primarySwatch: Colors.purple,
         accentColor: Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Color(0xFFffffff),

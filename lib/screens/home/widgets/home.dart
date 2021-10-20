@@ -3,6 +3,7 @@ import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/helpers/prayerTimes.dart';
 import 'package:prayer_time_application/screens/home/widgets/counter.dart';
 import 'package:prayer_time_application/screens/home/widgets/current_date.dart';
+import 'package:prayer_time_application/screens/home/widgets/my_location.dart';
 import 'package:prayer_time_application/screens/home/widgets/next_prayer.dart';
 
 class Home extends StatefulWidget {
@@ -42,8 +43,30 @@ class _HomeState extends State<Home> {
           child: Column(
             children: [
               NextPrayer(_nextPrayer),
+              Padding(
+                padding: const EdgeInsets.only(left: 80),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.location_on,
+                        color: color3 //Theme.of(context).primaryColor,
+                        ),
+                    SizedBox(
+                      width: 5.0,
+                    ),
+                    LocationScreen(),
+                    // Text(
+                    //   "Mumbai",
+                    //   style: TextStyle(
+                    //       color: color3, //Theme.of(context).primaryColor,
+                    //       fontSize: 24,
+                    //       fontWeight: FontWeight.w400),
+                    // )
+                  ],
+                ),
+              ),
               Container(
-                padding: EdgeInsets.only(top: 80),
+                padding: EdgeInsets.only(top: 65),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

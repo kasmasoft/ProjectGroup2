@@ -5,7 +5,6 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 void scheduleNotification() async {
-  tz.initializeTimeZones();
 
   final String? timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
   tz.setLocalLocation(tz.getLocation(timeZoneName!));
@@ -15,7 +14,8 @@ void scheduleNotification() async {
           channelDescription: 'your channel description',
           importance: Importance.max,
           priority: Priority.high,
-          ticker: 'ticker');
+          ticker: 'ticker',
+          sound: RawResourceAndroidNotificationSound('azan1'),);
   const NotificationDetails platformChannelSpecifics =
       NotificationDetails(android: androidPlatformChannelSpecifics);
   await flutterLocalNotificationsPlugin.show(
@@ -34,4 +34,9 @@ void scheduleNotification() async {
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime);
+}
+
+
+void showNotification() {
+
 }

@@ -48,11 +48,11 @@ class _AdzanState extends State<Adzan> {
           SizedBox(
             height: 25,
           ),
-          GestureDetector(
-              onTap: () {
-                scheduleNotification();
-              },
-              child: Icon(Icons.notification_add, color: Colors.white)),
+          // GestureDetector(
+          //     onTap: () {
+          //       scheduleNotification();
+          //     },
+          //     child: Icon(Icons.notification_add, color: Colors.white)),
           SizedBox(
             height: 25,
           ),

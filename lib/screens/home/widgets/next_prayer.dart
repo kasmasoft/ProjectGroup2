@@ -30,7 +30,7 @@ class _NextPrayerState extends State<NextPrayer> {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w300,
-              color: Theme.of(context).primaryColor,
+              color: color3,
               letterSpacing: letterspacing,
             ),
           ),
@@ -39,7 +39,8 @@ class _NextPrayerState extends State<NextPrayer> {
             style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor),
+                color: color3
+              ),
           ),
         ],
       ),
