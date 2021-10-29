@@ -44,7 +44,7 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: (_currentPosition != Null && _currentAddress != null) //&& 
+      child: (_currentPosition != Null && _currentAddress != null)
           ? Text(
               _currentAddress!,
               style: TextStyle(

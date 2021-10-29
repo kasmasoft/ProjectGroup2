@@ -1,5 +1,6 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'routes.dart';
 import 'screens/splash/splash_screen.dart';
@@ -8,21 +9,27 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
+///Receive message when app is in background solution for on message
+Future<void> backgroundHandler(RemoteMessage message) async{
+  print(message.data.toString());
+  print(message.notification!.title);
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
 
-  const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings('app_logo');
-  final IOSInitializationSettings initializationSettingsIOS =
-      IOSInitializationSettings(
-          requestSoundPermission: true,
-          requestBadgePermission: false,
-          requestAlertPermission: true);
-  final InitializationSettings initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-
+  // const AndroidInitializationSettings initializationSettingsAndroid =
+  //     AndroidInitializationSettings('app_logo');
+  // final IOSInitializationSettings initializationSettingsIOS =
+  //     IOSInitializationSettings(
+  //         requestSoundPermission: true,
+  //         requestBadgePermission: false,
+  //         requestAlertPermission: true);
+  // final InitializationSettings initializationSettings = InitializationSettings(
+  //     android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+  // await flutterLocalNotificationsPlugin.initialize(initializationSettings);
   runApp(MyApp());
 }
 
@@ -34,7 +41,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Prayer Time App',
       theme: ThemeData(
-        primaryColor: Color(0xFFc585f7),
+        primaryColor: Color(0xFF8e24aa),
         primarySwatch: Colors.purple,
         accentColor: Color(0xFFD8ECF1),
         scaffoldBackgroundColor: Color(0xFFffffff),

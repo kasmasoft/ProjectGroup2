@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:prayer_time_application/constants.dart';
+import 'package:prayer_time_application/helpers/local_notification_services.dart';
+
 import 'package:prayer_time_application/helpers/prayerTimes.dart';
 
 class NextCounter extends StatefulWidget {
@@ -30,11 +32,15 @@ class _NextCounterState extends State<NextCounter> {
   countDown() {
     final cd = -1;
 
-    if(mounted) {
+    if (mounted) {
       setState(() {
         final seconds = duration!.inSeconds + cd;
         duration = Duration(seconds: seconds);
       });
+    }
+
+    if (duration!.inSeconds == 1) {
+      LocalNotificationService.scheduleNotification('dhuhr', 'mumbai');
     }
   }
 

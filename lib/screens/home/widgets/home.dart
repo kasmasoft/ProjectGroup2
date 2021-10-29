@@ -15,11 +15,9 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late String _nextPrayer;
-  late final Map<String, String> _prayers;
 
   @override
   void initState() {
-    _prayers = getPrayerTimes();
     _nextPrayer = getNextPrayer();
     super.initState();
   }
@@ -49,19 +47,12 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(Icons.location_on,
-                        color: color3 //Theme.of(context).primaryColor,
+                        color: color3,
                         ),
                     SizedBox(
                       width: 5.0,
                     ),
                     LocationScreen(),
-                    // Text(
-                    //   "Mumbai",
-                    //   style: TextStyle(
-                    //       color: color3, //Theme.of(context).primaryColor,
-                    //       fontSize: 24,
-                    //       fontWeight: FontWeight.w400),
-                    // )
                   ],
                 ),
               ),

@@ -1,4 +1,7 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:prayer_time_application/constants.dart';
+import 'package:prayer_time_application/helpers/local_notification_services.dart';
 import '../prayers/prayers.dart';
 import '../calendar/calendar.dart';
 import 'widgets/home.dart';
@@ -14,7 +17,41 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentTab = 0;
-   List<Widget> _widgetOptions = <Widget>[
+
+  void initState() {
+    super.initState();
+
+    ///gives you the message on which user taps
+    ///and it opened the app from terminated state
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if(message != null){
+        final routeFromMessage = message.data["route"];
+
+        Navigator.of(context).pushNamed(routeFromMessage);
+      }
+    });
+
+    ///forground work
+    FirebaseMessaging.onMessage.listen((message) {
+      if(message.notification != null){
+        print(message.notification!.body);
+        print(message.notification!.title);
+      }
+
+      LocalNotificationService.display(message);
+    });
+
+    
+    ///When the app is in background but opened and user taps
+    ///on the notification
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      final routeFromMessage = message.data["route"];
+
+      Navigator.of(context).pushNamed(routeFromMessage);
+    });
+  }
+
+  List<Widget> _widgetOptions = <Widget>[
     Home(),
     Calendar(),
     Prayers(),
@@ -47,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
               activeIcon: Icon(
                 Icons.home,
                 size: 30,
-                color: Theme.of(context).primaryColor,
+                color: color17,
               ),
             ),
             BottomNavigationBarItem(
@@ -60,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
               activeIcon: Icon(
                 Icons.calendar_today,
                 size: 30,
-                color: Theme.of(context).primaryColor,
+                color: color17,
               ),
             ),
             BottomNavigationBarItem(
@@ -73,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
               activeIcon: Icon(
                 Icons.task_alt_outlined,
                 size: 30,
-                color: Theme.of(context).primaryColor,
+                color: color17,
               ),
             ),
             BottomNavigationBarItem(
@@ -86,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
               activeIcon: Icon(
                 Icons.more_horiz_outlined,
                 size: 30,
-                color: Theme.of(context).primaryColor,
+                color: color17,
               ),
             )
           ],
