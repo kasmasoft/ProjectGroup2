@@ -3,8 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/helpers/local_notification_services.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:audioplayers/audio_cache.dart';
 
 import 'package:prayer_time_application/helpers/prayerTimes.dart';
+import 'package:prayer_time_application/providers/notification_model.dart';
+import 'package:provider/provider.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:vibration/vibration.dart';
 
 class NextCounter extends StatefulWidget {
   final nextPrayer;
@@ -17,6 +23,7 @@ class NextCounter extends StatefulWidget {
 class _NextCounterState extends State<NextCounter> {
   Duration? duration;
   Timer? timer;
+  final player = AudioCache();
 
   @override
   void initState() {
@@ -29,7 +36,7 @@ class _NextCounterState extends State<NextCounter> {
     Timer.periodic(Duration(seconds: 1), (Timer t) => countDown());
   }
 
-  countDown() {
+  countDown() async {
     final cd = -1;
 
     if (mounted) {
@@ -37,10 +44,6 @@ class _NextCounterState extends State<NextCounter> {
         final seconds = duration!.inSeconds + cd;
         duration = Duration(seconds: seconds);
       });
-    }
-
-    if (duration!.inSeconds == 1) {
-      LocalNotificationService.scheduleNotification('dhuhr', 'mumbai');
     }
   }
 
@@ -50,13 +53,49 @@ class _NextCounterState extends State<NextCounter> {
     final minutes = twoDigits(duration!.inMinutes.remainder(60));
     final seconds = twoDigits(duration!.inSeconds.remainder(60));
 
-    return Text(
-      hours + ":" + minutes + ":" + seconds,
-      style: TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.w700,
-        color: color2,
-      ),
+    vibrate() async {
+      if (await Vibration.hasVibrator()) {
+        print('vibration working');
+        Vibration.vibrate(pattern: [
+          500,
+          500,
+          500,
+          500,
+          500,
+          500,
+          500,
+          500,
+          500,
+          500,
+          500,
+          500
+        ]);
+      }
+    }
+
+    return Consumer<NotificationModel>(
+      builder: (context, obj, child) {
+        if (duration!.inSeconds == 0) {
+          LocalNotificationService.scheduleNotification('dhuhr', 'mumbai');
+          print(obj.currentPrayer);
+          print(obj.getToggleIndex());
+          if (obj.getToggleIndex() == 0) {
+            print(obj.currentPrayer);
+            player.play('audios/azaan.mp3');
+          } else if (obj.getToggleIndex() == 1) {
+            print('vibrate');
+            vibrate();
+          }
+        }
+        return Text(
+          hours + ":" + minutes + ":" + seconds,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            color: color2,
+          ),
+        );
+      },
     );
   }
 

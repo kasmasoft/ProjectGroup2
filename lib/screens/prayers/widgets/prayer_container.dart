@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:prayer_time_application/providers/notification_model.dart';
+import 'package:provider/provider.dart';
 
 class PrayerContainer extends StatefulWidget {
   final String name;
   final String time;
+  final int toggleIndex;
 
-  PrayerContainer(this.name, this.time);
+  PrayerContainer(this.name, this.time, this.toggleIndex);
 
   @override
   _PrayerContainerState createState() => _PrayerContainerState();
@@ -41,15 +44,17 @@ class _PrayerContainerState extends State<PrayerContainer> {
               SizedBox(
                 width: 10,
               ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    currentToggleIndex = (currentToggleIndex + 1) % 3;
-                  });
+              Consumer<NotificationModel>(
+                builder: (context, obj, child) {
+                  return GestureDetector(
+                    onTap: () {
+                      obj.saveToggle(widget.name.toLowerCase()+'_index');
+                    },
+                    child: Container(
+                      child: _toggleList[widget.toggleIndex],
+                    ),
+                  );
                 },
-                child: Container(
-                  child: _toggleList[currentToggleIndex],
-                ),
               ),
             ],
           )

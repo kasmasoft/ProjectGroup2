@@ -31,6 +31,8 @@ class LocalNotificationService {
         "prayers channel",
         importance: Importance.max,
         priority: Priority.max,
+        sound: RawResourceAndroidNotificationSound('azan1'),
+        playSound: true,
       ));
 
       await _notificationsPlugin.show(
@@ -51,10 +53,10 @@ class LocalNotificationService {
           channelDescription: 'your channel description',
           importance: Importance.max,
           priority: Priority.high,
-          ticker: 'ticker',
+          playSound: true,
           sound: RawResourceAndroidNotificationSound('azan1'),
           styleInformation: BigTextStyleInformation(''),
-          );
+        );
   const NotificationDetails platformChannelSpecifics =
       NotificationDetails(android: androidPlatformChannelSpecifics);
   await _notificationsPlugin.show(

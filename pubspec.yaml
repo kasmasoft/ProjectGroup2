@@ -47,6 +47,13 @@ dependencies:
   flutter_native_timezone: ^2.0.0
   flutter_local_notifications: ^9.0.0
   firebase_messaging: ^10.0.8
+  flutter_ringtone_player: ^3.1.0
+  audioplayers: ^0.10.0
+  vibration: ^1.7.3
+
+  #state management
+  provider: ^6.0.1
+
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +76,7 @@ flutter:
   assets:
     - assets/full-bloom.png
     - assets/images/
+    - assets/audios/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

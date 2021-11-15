@@ -39,20 +39,17 @@ Duration getNextPrayerCounter(nextPrayer) {
   PrayerTimes prayers = getTodayPrayers();
   if (nextPrayer == 'fajr') {
     return prayers.fajr.difference(DateTime.now());
-  }
-  else if(nextPrayer == 'dhuhr'){
+  } else if (nextPrayer == 'dhuhr') {
     return prayers.dhuhr.difference(DateTime.now());
-  }
-  else if(nextPrayer == 'asr') {
+  } else if (nextPrayer == 'asr') {
     return prayers.asr.difference(DateTime.now());
-  }
-  else if(nextPrayer == 'maghrib') {
+  } else if (nextPrayer == 'maghrib') {
     return prayers.maghrib.difference(DateTime.now());
-  }
-  else if(nextPrayer == 'isha') {
+  } else if (nextPrayer == 'isha') {
     return prayers.isha.difference(DateTime.now());
-  }
-  else {
-    return -(prayers.isha.difference(DateTime.now()));
+  } else {
+    var now = prayers.fajr;
+    return DateTime(now.year, now.month, now.day + 1)
+        .difference(DateTime.now());
   }
 }

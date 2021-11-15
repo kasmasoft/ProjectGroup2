@@ -2,6 +2,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:prayer_time_application/providers/auth_provider.dart';
+import 'package:prayer_time_application/providers/main_model.dart';
+import 'package:prayer_time_application/providers/notification_model.dart';
+import 'package:provider/provider.dart';
 import 'routes.dart';
 import 'screens/splash/splash_screen.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -38,17 +42,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Prayer Time App',
-      theme: ThemeData(
-        primaryColor: Color(0xFF8e24aa),
-        primarySwatch: Colors.purple,
-        accentColor: Color(0xFFD8ECF1),
-        scaffoldBackgroundColor: Color(0xFFffffff),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => MainModel()),
+        ChangeNotifierProvider(create: (context) => NotificationModel()),
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
+      ],
+      child: MaterialApp(
+        title: 'Prayer Time App',
+        theme: ThemeData(
+          primaryColor: Color(0xFF8e24aa),
+          primarySwatch: Colors.purple,
+          accentColor: Color(0xFFD8ECF1),
+          scaffoldBackgroundColor: Color(0xFFffffff),
+        ),
+        initialRoute: SplashScreen.routeName,
+        routes: routes,
+        debugShowCheckedModeBanner: false,
       ),
-      initialRoute: SplashScreen.routeName,
-      routes: routes,
-      debugShowCheckedModeBanner: false,
     );
   }
 }
