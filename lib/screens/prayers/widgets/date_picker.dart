@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/screens/prayers/widgets/icon_text.dart';
 
 class DatePicker extends StatefulWidget {
@@ -37,7 +38,7 @@ class _DatePickerState extends State<DatePicker> {
               child: iconText(
                 Icon(
                   Icons.calendar_today,
-                  color: Colors.white,
+                  color: color2,
                   size: 15,
                 ), 
                 formattedDate, 

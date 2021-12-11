@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/net/validator.dart';
 
 class ForgotPassword extends StatelessWidget {
@@ -41,10 +42,16 @@ class ForgotPassword extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.all(10),
                           child: TextFormField(
+                            style: TextStyle(color: color2),
                             controller: emailController,
                             decoration: new InputDecoration(
                               border: new OutlineInputBorder(),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: color2, width: 2.0)),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: color2, width: 2.0)),
                               labelText: 'Email',
+                              labelStyle: TextStyle(color: color2),
                             ),
                             validator: (value) =>
                               Validator.validateEmail(email: value.toString()),

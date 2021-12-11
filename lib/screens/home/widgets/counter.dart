@@ -81,10 +81,14 @@ class _NextCounterState extends State<NextCounter> {
           print(obj.getToggleIndex());
           if (obj.getToggleIndex() == 0) {
             print(obj.currentPrayer);
-            player.play('audios/azaan.mp3');
+            player.play('audios/azaan.mp3', isNotification: true);
+            player.clear('audios/azaan.mp3');
           } else if (obj.getToggleIndex() == 1) {
             print('vibrate');
             vibrate();
+          } else if (obj.getToggleIndex() == 2) {
+            player.play('audios/beep.mp3', isNotification: true);
+            player.clear('audios/beep.mp3');
           }
         }
         return Text(
@@ -111,7 +115,6 @@ class _NextCounterState extends State<NextCounter> {
               fontSize: 18,
               fontWeight: FontWeight.w300,
               color: color2,
-              letterSpacing: letterspacing,
             ),
           ),
           buildTime(),

@@ -29,8 +29,8 @@ class _NextPrayerState extends State<NextPrayer> {
             widget.nextPrayer.toString().capitalize(),
             style: TextStyle(
               fontSize: 20,
-              fontWeight: FontWeight.w300,
-              color: color3,
+              fontWeight: FontWeight.w400,
+              color: color2,
               letterSpacing: letterspacing,
             ),
           ),
@@ -39,7 +39,7 @@ class _NextPrayerState extends State<NextPrayer> {
             style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: color3
+                color: color2
               ),
           ),
         ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'size_config.dart';
-import 'constants.dart';
+import 'splash_constant.dart';
 
 class SplashContent extends StatelessWidget {
   const SplashContent({
@@ -25,6 +25,9 @@ class SplashContent extends StatelessWidget {
         ),
         Text(
           text!,
+          style: TextStyle(
+            color: Colors.white,
+          ),
           textAlign: TextAlign.center,
         ),
         Spacer(flex: 2),

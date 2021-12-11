@@ -1,133 +1,108 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:prayer_time_application/constants.dart';
-import 'package:prayer_time_application/helpers/local_notification_services.dart';
-import '../prayers/prayers.dart';
-import '../calendar/calendar.dart';
-import 'widgets/home.dart';
-import '../more/more.dart';
+import 'package:prayer_time_application/helpers/prayerTimes.dart';
+import 'package:prayer_time_application/screens/home/widgets/counter.dart';
+import 'package:prayer_time_application/screens/home/widgets/current_date.dart';
+import 'package:prayer_time_application/screens/home/widgets/my_location.dart';
+import 'package:prayer_time_application/screens/home/widgets/next_prayer.dart';
+import 'package:prayer_time_application/screens/home/widgets/setting_button.dart';
+import 'package:prayer_time_application/screens/mosque_search/mosque_search.dart';
+import 'package:prayer_time_application/screens/prayers/prayers.dart';
+import 'package:prayer_time_application/screens/qibla_compass/qiblah_screen.dart';
+import 'package:prayer_time_application/screens/tracker/tracker.dart';
+import 'widgets/custom_icon.dart';
+//import 'package:flutter_svg/svg.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  static String routeName = "/home";
 
-  static String routeName = "/";
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<Home> createState() => _HomeState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  int _currentTab = 0;
+class _HomeState extends State<Home> {
+  late String _nextPrayer;
 
+  @override
   void initState() {
+    _nextPrayer = getNextPrayer();
     super.initState();
-
-    ///gives you the message on which user taps
-    ///and it opened the app from terminated state
-    FirebaseMessaging.instance.getInitialMessage().then((message) {
-      if(message != null){
-        final routeFromMessage = message.data["route"];
-
-        Navigator.of(context).pushNamed(routeFromMessage);
-      }
-    });
-
-    ///forground work
-    FirebaseMessaging.onMessage.listen((message) {
-      if(message.notification != null){
-        print(message.notification!.body);
-        print(message.notification!.title);
-      }
-
-      LocalNotificationService.display(message);
-    });
-
-    
-    ///When the app is in background but opened and user taps
-    ///on the notification
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      final routeFromMessage = message.data["route"];
-
-      Navigator.of(context).pushNamed(routeFromMessage);
-    });
   }
 
-  List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    Calendar(),
-    Prayers(),
-    More(),
-  ];
   @override
   Widget build(BuildContext context) {
+    double screenWidth;
+    screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: _widgetOptions[_currentTab],
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          primaryColor: Color(0xFF37b89a),
-        ),
-        child: BottomNavigationBar(
-          currentIndex: _currentTab,
-          type: BottomNavigationBarType.fixed,
-          onTap: (int value) {
-            setState(() {
-              _currentTab = value;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                size: 30,
-              ),
-              // ignore: deprecated_member_use
-              title: SizedBox.shrink(),
-              activeIcon: Icon(
-                Icons.home,
-                size: 30,
-                color: color17,
+      body: Column(
+        children: [
+          Container(
+              child: (Stack(children: <Widget>[
+            Container(
+              child: Image.asset(
+                "assets/images/lights.jpeg",
+                width: screenWidth,
+                //height: 500,
               ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.calendar_today,
-                size: 30,
-              ),
-              // ignore: deprecated_member_use
-              title: SizedBox.shrink(),
-              activeIcon: Icon(
-                Icons.calendar_today,
-                size: 30,
-                color: color17,
+            Container(
+                padding: EdgeInsets.only(
+                  top: 20,
+                ),
+                child: Column(children: [
+                  SettingButton(),
+                  Padding(
+                      padding: EdgeInsets.only(top: 90),
+                      child: NextPrayer(_nextPrayer)),
+                  LocationScreen(),
+                  Container(
+                    padding: EdgeInsets.only(top: 40),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CurrentDate(),
+                        NextCounter(_nextPrayer),
+                      ],
+                    ),
+                  ),
+                ]))
+          ]))),
+          Expanded(
+            child: Container(
+              color: color3,
+              //child: Padding(
+              // padding: EdgeInsets.fromLTRB(0, 0, 1, 0),
+              child: GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: 1.5,
+                children: <Widget>[
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, MosqueScreen.routeName);
+                      },
+                      child: CustomeIcon(Icons.search, 'Mosque Search')),
+                  CustomeIcon(Icons.food_bank, 'Halal Food Search'),
+                  GestureDetector(
+                      onTap: () => {
+                            Navigator.pushNamed(context, Prayers.routeName),
+                          },
+                      child: CustomeIcon(Icons.watch, 'Prayer Times')),
+                  GestureDetector(
+                    onTap: () => {
+                      Navigator.pushNamed(context, PrayerTracker.routeName),
+                    },
+                    child: CustomeIcon(Icons.list_alt_rounded, 'Prayer Tracker')),
+                  CustomeIcon(Icons.calendar_today_sharp, 'Fast Tracker'),
+                  GestureDetector(
+                    onTap: () => {
+                      Navigator.pushNamed(context, QiblahCompassScreen.routeName),
+                    },
+                    child: CustomeIcon(Icons.compass_calibration_sharp, 'Qibla Compass')),
+                ],
               ),
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.task_alt_outlined,
-                size: 30,
-              ),
-              // ignore: deprecated_member_use
-              title: SizedBox.shrink(),
-              activeIcon: Icon(
-                Icons.task_alt_outlined,
-                size: 30,
-                color: color17,
-              ),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.more_horiz_outlined,
-                size: 30,
-              ),
-              // ignore: deprecated_member_use
-              title: SizedBox.shrink(),
-              activeIcon: Icon(
-                Icons.more_horiz_outlined,
-                size: 30,
-                color: color17,
-              ),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

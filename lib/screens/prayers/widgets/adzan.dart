@@ -38,7 +38,7 @@ class _AdzanState extends State<Adzan> {
             iconText(
                 Icon(
                   Icons.location_on,
-                  color: Colors.white,
+                  color: color2,
                   size: 15,
                 ),
                 "Mira Road, Thane",

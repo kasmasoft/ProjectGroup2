@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prayer_time_application/constants.dart';
 import 'widgets/login_form.dart';
 
 
@@ -23,7 +24,7 @@ class LoginScreen extends StatelessWidget {
                     child: Text(
                       'Prayer Time',
                       style: TextStyle(
-                          color: Theme.of(context).primaryColor,
+                          color: color2,
                           fontWeight: FontWeight.w500,
                           fontSize: 30),
                     )

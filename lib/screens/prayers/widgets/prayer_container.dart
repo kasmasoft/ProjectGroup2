@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/providers/notification_model.dart';
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PrayerContainer extends StatefulWidget {
   final String name;
@@ -17,29 +19,30 @@ class _PrayerContainerState extends State<PrayerContainer> {
   int currentToggleIndex = 0;
 
   List<Widget> _toggleList = [
-    Icon(Icons.alarm, color: Colors.white),
-    Icon(Icons.vibration, color: Colors.white),
-    Icon(Icons.phonelink_ring_rounded, color: Colors.white),
+    FaIcon(FontAwesomeIcons.volumeUp, color: color2, size: 25,),
+    Icon(Icons.vibration, color: color2, size: 28,),
+    Icon(Icons.phonelink_ring_rounded, color: color2, size: 28,),
+    FaIcon(FontAwesomeIcons.volumeMute, color: color2, size: 25,),
   ];
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-          color: Color(0xFF8133d4), borderRadius: BorderRadius.circular(10)),
+          color: color3, borderRadius: BorderRadius.circular(10)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
             widget.name,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: TextStyle(color: color2, fontWeight: FontWeight.bold),
           ),
           Row(
             children: <Widget>[
               Text(
                 widget.time,
                 style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    TextStyle(color: color2, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 width: 10,

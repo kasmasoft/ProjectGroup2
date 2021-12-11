@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import 'splash_constant.dart';
 
 import 'size_config.dart';
 

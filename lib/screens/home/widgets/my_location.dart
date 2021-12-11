@@ -43,20 +43,28 @@ class _LocationScreenState extends State<LocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: (_currentPosition != Null && _currentAddress != null)
-          ? Text(
-              _currentAddress!,
-              style: TextStyle(
-                  color: color3,
-                  fontWeight: FontWeight.w300,
-                  fontSize: 20),
-            )
-          : Text(
-              '',
-              style: TextStyle(
-                  color: color2, fontWeight: FontWeight.w300, fontSize: 25),
-            ),
-    );
+    return (_currentPosition != Null && _currentAddress != null)
+        ?
+        //
+        Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.location_on,
+                color: color2,
+              ),
+              SizedBox(
+                width: 5.0,
+              ),
+              Text(
+                _currentAddress!,
+                style: TextStyle(
+                    color: color2, fontWeight: FontWeight.w400, fontSize: 20),
+              ),
+            ],
+          )
+        : Text(
+            '',
+          );
   }
 }

@@ -12,7 +12,7 @@ class _CurrentDateState extends State<CurrentDate> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 10),
+      padding: EdgeInsets.only(left: 8),
       child: Consumer<MainModel>(
         builder: (context, obj, child) {
           return Column(
@@ -23,7 +23,6 @@ class _CurrentDateState extends State<CurrentDate> {
                   fontSize: 18,
                   fontWeight: FontWeight.w300,
                   color: color2,
-                  letterSpacing: letterspacing,
                 ),
               ),
               Text(

@@ -28,6 +28,9 @@ dependencies:
   intl: ^0.17.0
   hijri: ^3.0.0
 
+  #icon
+  font_awesome_flutter: ^9.2.0
+
   # FlutterFire
   firebase_core: "^1.6.0"
   firebase_database: ^8.0.0
@@ -43,6 +46,14 @@ dependencies:
   geolocator: ^7.7.0
   geocoding: ^2.0.1
 
+  flutter_qiblah: ^2.0.2
+
+  settings_ui:
+  url_launcher:
+  awesome_dialog: ^2.1.1
+  rating_dialog: ^2.0.1
+  
+
   #push notification
   flutter_native_timezone: ^2.0.0
   flutter_local_notifications: ^9.0.0
@@ -50,10 +61,15 @@ dependencies:
   flutter_ringtone_player: ^3.1.0
   audioplayers: ^0.10.0
   vibration: ^1.7.3
+  rxdart: ^0.27.3
 
   #state management
   provider: ^6.0.1
 
+  #maps
+  google_place: ^0.4.3
+
+  table_calendar: ^3.0.3
 
 dev_dependencies:
   flutter_test:

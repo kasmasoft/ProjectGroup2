@@ -1,6 +1,7 @@
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:prayer_time_application/services/database_services.dart';
 
 class FireAuth {
   static Future<User?> registerUsingEmailPassword({
@@ -18,9 +19,11 @@ class FireAuth {
       );
       user = userCredential.user;
       // ignore: deprecated_member_use
-      await user!.updateProfile(displayName: firstName+ " " + lastName);
+      await user!.updateProfile(displayName: firstName + " " + lastName);
       await user.reload();
       user = auth.currentUser;
+      DatabaseServices db = DatabaseServices();
+      db.initToggle(user!.uid);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');

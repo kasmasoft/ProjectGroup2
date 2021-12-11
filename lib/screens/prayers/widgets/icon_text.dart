@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prayer_time_application/constants.dart';
 
 Widget iconText(Icon icon, String title, String subTitle) {
     double h = 30;
@@ -7,7 +8,7 @@ Widget iconText(Icon icon, String title, String subTitle) {
       width: w,
       height: h,
       decoration: BoxDecoration(
-          color: Color(0xFF8133d4), borderRadius: BorderRadius.circular(w / 2)
+          color: color3, borderRadius: BorderRadius.circular(w / 2)
         ),
       child: icon,
     );
@@ -15,8 +16,8 @@ Widget iconText(Icon icon, String title, String subTitle) {
     Column right = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(title, style: TextStyle(color: Colors.white)),
-        Text(subTitle, style: TextStyle(color: Colors.white, fontSize: 10)),
+        Text(title, style: TextStyle(color: color2)),
+        Text(subTitle, style: TextStyle(color: color2, fontSize: 10)),
       ],
     );
 

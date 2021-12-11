@@ -8,9 +8,13 @@ class AuthProvider with ChangeNotifier {
   String? uid;
 
   AuthProvider() {
-    user = auth.currentUser;
-    isAuthenticated = user == null ? false : true;
-    uid = user!.uid;
+    try {
+      user = auth.currentUser;
+      isAuthenticated = user == null ? false : true;
+      uid = user!.uid;
+    } catch (e) {
+      print(e);
+    }
   }
 
   bool get isCurrUserAuthenticated => isAuthenticated;

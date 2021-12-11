@@ -12,18 +12,23 @@ class NotificationModel extends ChangeNotifier {
   String? uid;
 
   NotificationModel() {
-    user = auth.currentUser;
+    try {
+       user = auth.currentUser;
     uid = user!.uid;
     ref.child('/$uid/notification_setting/').onValue.listen((event) {
       var snapshot = event.snapshot;
       this.settings = (snapshot.value as Object?) as Map<dynamic, dynamic>;
       print(settings);
     });
+    }
+    catch (e) {
+      print(e);
+    }
   }
 
   void saveToggle(String prayer) {
     var childRef = ref.child("/$uid/notification_setting/$prayer/");
-    childRef.set((settings[prayer] + 1) % 3);
+    childRef.set((settings[prayer] + 1) % 4);
     notifyListeners();
   }
 

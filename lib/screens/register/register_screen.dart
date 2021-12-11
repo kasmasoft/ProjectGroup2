@@ -2,9 +2,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter/material.dart';
+import 'package:prayer_time_application/constants.dart';
+import 'package:prayer_time_application/screens/home/Home_Screen.dart';
 import 'package:prayer_time_application/screens/login/login_screen.dart';
 import '../../net/validator.dart';
-import '../home/Home_screen.dart';
 import '../../net/flutterfire.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -44,7 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Text(
                     'Welcome',
                     style: TextStyle(
-                        color: Theme.of(context).primaryColor,
+                        color: color2,
                         fontWeight: FontWeight.w500,
                         fontSize: 30),
                   )),
@@ -55,10 +56,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Container(
                         padding: EdgeInsets.all(10),
                         child: TextFormField(
+                          style: TextStyle(color: color2),
                           controller: firstNameController,
                           decoration: new InputDecoration(
                             border: new OutlineInputBorder(),
-                            labelText: 'Firsl Name',
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: color2, width: 2.0)),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: color2, width: 2.0)),
+                            labelText: 'First Name',
+                            labelStyle: TextStyle(color: color2),
                           ),
                           validator: (value) =>
                               Validator.validateName(name: value.toString()),
@@ -67,10 +74,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Container(
                         padding: EdgeInsets.all(10),
                         child: TextFormField(
+                          style: TextStyle(color: color2),
                           controller: lastNameController,
                           decoration: new InputDecoration(
                             border: new OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: color2, width: 2.0)),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: color2, width: 2.0)),
                             labelText: 'Last Name',
+                            labelStyle: TextStyle(color: color2),
                           ),
                           validator: (value) =>
                               Validator.validateName(name: value.toString()),
@@ -79,10 +92,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Container(
                         padding: EdgeInsets.all(10),
                         child: TextFormField(
+                          style: TextStyle(color: color2),
                           controller: emailController,
                           decoration: new InputDecoration(
                             border: new OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: color2, width: 2.0)),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: color2, width: 2.0)),
                             labelText: 'Email',
+                            labelStyle: TextStyle(color: color2),
                           ),
                           validator: (value) =>
                               Validator.validateEmail(email: value.toString()),
@@ -91,11 +110,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Container(
                         padding: EdgeInsets.all(10),
                         child: TextFormField(
+                          style: TextStyle(color: color2),
                           obscureText: true,
                           controller: confirmPasswordController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: color2, width: 2.0)),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: color2, width: 2.0)),
                             labelText: 'Password',
+                            labelStyle: TextStyle(color: color2),
                           ),
                           validator: (value) => Validator.validatePassword(
                               password: value.toString()),
@@ -104,11 +129,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Container(
                         padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                         child: TextFormField(
+                          style: TextStyle(color: color2),
                           obscureText: true,
                           controller: passwordController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: color2, width: 2.0)),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: color2, width: 2.0)),
                             labelText: 'Confirm Password',
+                            labelStyle: TextStyle(color: color2),
                           ),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -137,7 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)),
                                 primary: Colors.white,
-                                backgroundColor: Theme.of(context).primaryColor,
+                                backgroundColor: color2,
                               ),
                               child: Text('Sign Up'),
                               onPressed: () async {
@@ -150,7 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     password: passwordController.text,
                                   );
                                   if (user != null) {
-                                    Navigator.pushNamed(context, HomeScreen.routeName);
+                                    Navigator.pushNamed(context, Home.routeName);
                                   }
                                 }
                               },
@@ -159,13 +190,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Container(
                           child: Row(
                         children: <Widget>[
-                          Text('Allready have an account?'),
+                          Text('Allready have an account?' , style: TextStyle(color: color2
+                          ),),
                           TextButton(
                             child: Text(
                               'login',
                               style: TextStyle(
                                   fontSize: 15,
-                                  color: Theme.of(context).primaryColor),
+                                  color: Colors.white),
                             ),
                             onPressed: () {
                               Navigator.pushNamed(context, LoginScreen.routeName);
