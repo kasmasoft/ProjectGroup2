@@ -5,9 +5,13 @@ import 'package:hijri/hijri_calendar.dart';
 import 'package:intl/intl.dart';
 
 class MainModel extends ChangeNotifier {
-
   var _hijridt = HijriCalendar.now();
   String _ggdt = DateFormat('EEEE, dd MMM').format(DateTime.now());
+
+  String hijrifromdate(DateTime date) {
+    HijriCalendar hDate = HijriCalendar.fromDate(date);
+    return hDate.hDay.toString() + " " + hDate.longMonthName + " " + hDate.hYear.toString();
+  }
 
   Position? _currentPosition;
   late List<String?> _currentAddress;

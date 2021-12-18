@@ -51,7 +51,7 @@ dependencies:
   settings_ui:
   url_launcher:
   awesome_dialog: ^2.1.1
-  rating_dialog: ^2.0.1
+  rating_dialog: ^2.0.3
   
 
   #push notification
@@ -70,6 +70,7 @@ dependencies:
   google_place: ^0.4.3
 
   table_calendar: ^3.0.3
+  getwidget: ^2.0.4
 
 dev_dependencies:
   flutter_test:

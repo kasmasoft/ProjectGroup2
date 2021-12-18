@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/helpers/prayerTimes.dart';
+import 'package:prayer_time_application/screens/fast_tracker/fast_tracker.dart';
 import 'package:prayer_time_application/screens/home/widgets/counter.dart';
 import 'package:prayer_time_application/screens/home/widgets/current_date.dart';
 import 'package:prayer_time_application/screens/home/widgets/my_location.dart';
 import 'package:prayer_time_application/screens/home/widgets/next_prayer.dart';
 import 'package:prayer_time_application/screens/home/widgets/setting_button.dart';
 import 'package:prayer_time_application/screens/mosque_search/mosque_search.dart';
+import 'package:prayer_time_application/screens/prayer_tracker/tracker.dart';
 import 'package:prayer_time_application/screens/prayers/prayers.dart';
 import 'package:prayer_time_application/screens/qibla_compass/qiblah_screen.dart';
-import 'package:prayer_time_application/screens/tracker/tracker.dart';
 import 'widgets/custom_icon.dart';
 //import 'package:flutter_svg/svg.dart';
 
@@ -92,7 +93,11 @@ class _HomeState extends State<Home> {
                       Navigator.pushNamed(context, PrayerTracker.routeName),
                     },
                     child: CustomeIcon(Icons.list_alt_rounded, 'Prayer Tracker')),
-                  CustomeIcon(Icons.calendar_today_sharp, 'Fast Tracker'),
+                  GestureDetector(
+                    onTap: () => {
+                      Navigator.pushNamed(context, FastTracker.routeName),
+                    },
+                    child: CustomeIcon(Icons.calendar_today_sharp, 'Fast Tracker')),
                   GestureDetector(
                     onTap: () => {
                       Navigator.pushNamed(context, QiblahCompassScreen.routeName),

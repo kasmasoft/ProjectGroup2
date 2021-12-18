@@ -53,3 +53,4 @@ Duration getNextPrayerCounter(nextPrayer) {
         .difference(DateTime.now());
   }
 }
+

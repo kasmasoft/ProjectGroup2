@@ -76,7 +76,7 @@ class _NextCounterState extends State<NextCounter> {
     return Consumer<NotificationModel>(
       builder: (context, obj, child) {
         if (duration!.inSeconds == 0) {
-          LocalNotificationService.scheduleNotification('dhuhr', 'mumbai');
+          LocalNotificationService.scheduleNotification(obj.currentPrayer, 'mumbai');
           print(obj.currentPrayer);
           print(obj.getToggleIndex());
           if (obj.getToggleIndex() == 0) {

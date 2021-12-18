@@ -84,8 +84,6 @@ class _TableEventsExampleState extends State<TableEventsExample> {
   @override
   Widget build(BuildContext context) {
     return Container(
-
-      padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
       child: Column(
         children: [
           TableCalendar<Event>(
@@ -101,11 +99,30 @@ class _TableEventsExampleState extends State<TableEventsExample> {
             startingDayOfWeek: StartingDayOfWeek.monday,
             calendarStyle: CalendarStyle(
               // Use `CalendarStyle` to customize the UI
+              isTodayHighlighted: true,
+              selectedDecoration: BoxDecoration(
+                color: Colors.amber.shade200,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+              todayDecoration: BoxDecoration(
+                color: color2,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+              defaultDecoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(25.0),
+                
+              ),
+              weekendDecoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(25.0),
+              ),
               outsideDaysVisible: false,
               defaultTextStyle: TextStyle(color: color2),
               selectedTextStyle: TextStyle(color: color2),
               weekendTextStyle: TextStyle(color: color2),
-              
             ),
             onDaySelected: _onDaySelected,
             onRangeSelected: _onRangeSelected,
@@ -138,7 +155,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
               valueListenable: _selectedEvents,
               builder: (context, value, _) {
                 return ListView.builder(
-                  itemCount: value.length,
+                  itemCount: 5,
                   itemBuilder: (context, index) {
                     return Container(
                       margin: const EdgeInsets.symmetric(
