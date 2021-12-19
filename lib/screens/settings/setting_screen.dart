@@ -84,7 +84,7 @@ class _SettingPageState extends State<SettingPage> {
             height: 15,
           ),
           Padding(
-            padding: EdgeInsets.all(5),
+            padding: EdgeInsets.all(10),
             child: Column(
               children: [
                 ElevatedButton(
@@ -188,118 +188,7 @@ class _SettingPageState extends State<SettingPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 5),
-                ElevatedButton(
-                  onPressed: () {
-                    showDialog<String>(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        title: Text('Change Language '),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Row(
-                              children: [
-                                Checkbox(
-                                  checkColor: Colors.greenAccent,
-                                  activeColor: Colors.red,
-                                  value: valuefirst,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      valuefirst = value!;
-                                    });
-                                  },
-                                ),
-                                Text("English"),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Checkbox(
-                                  checkColor: Colors.greenAccent,
-                                  activeColor: Colors.red,
-                                  value: valuesecond,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      valuesecond = value!;
-                                    });
-                                  },
-                                ),
-                                Text("ARABIC"),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Checkbox(
-                                  checkColor: Colors.greenAccent,
-                                  activeColor: Colors.red,
-                                  value: valuetherd,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      valuetherd = value!;
-                                    });
-                                  },
-                                ),
-                                Text("Turkish"),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Checkbox(
-                                  checkColor: Colors.greenAccent,
-                                  activeColor: Colors.red,
-                                  value: valueFour,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      // valueFour !=valuefirst ?valueFour=true:valuefirst=false;
-                                    });
-                                  },
-                                ),
-                                Text("FRENCH"),
-                              ],
-                            ),
-                          ],
-                        ),
-                        actions: <Widget>[
-                          MaterialButton(
-                            onPressed: () {
-                              Navigator.pop(context, 'Cancel');
-                            },
-                            child: const Text('Cancel'),
-                          ),
-                          MaterialButton(
-                            onPressed: () {
-                              Navigator.pop(context, 'UPDATE');
-                            },
-                            child: const Text('UPDATE'),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(primary: color1),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          'Change Language ',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: color2,
-                          ),
-                        ),
-                        Icon(
-                          Icons.contact_page_outlined,
-                          color: color2,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
                     AwesomeDialog(

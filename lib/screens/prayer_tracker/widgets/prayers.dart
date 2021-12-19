@@ -1,9 +1,6 @@
-import 'package:flutter/foundation.dart';
-
 class Prayer {
-  final bool fasted;
-  final DateTime date;
-  Prayer({required this.fasted, required this.date});
+  String name;
+  Prayer({required this.name});
 
-  String toString() => this.fasted.toString();
+  String toString() => this.name.toString();
 }

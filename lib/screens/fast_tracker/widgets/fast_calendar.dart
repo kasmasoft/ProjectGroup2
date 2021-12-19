@@ -73,14 +73,14 @@ class _CalendarState extends State<Calendar> {
             if (snapshot.hasData) {
               // print(snapshot.requireData.snapshot.value[
               //     "${selectedDay.day}-${selectedDay.month}-${selectedDay.year}"]);
-              snapshot.requireData.snapshot.value
+              if(snapshot.requireData.snapshot.exists){
+                snapshot.requireData.snapshot.value
                   .cast<String, dynamic>()
                   .forEach((dt, val) {
-                print(_converToZeroOffset(
-                    DateTime.parse(dt.toString() + " 00:00:00.000")));
                 selectedEvents[_converToZeroOffset(DateTime.parse(dt.toString() +" 00:00:00.000"))] = [
                       Fast(fasted: true, date: _converToZeroOffset(DateTime.parse(dt.toString() +" 00:00:00.000")))];
               });
+              }
             }
             return Container(
               child: Column(

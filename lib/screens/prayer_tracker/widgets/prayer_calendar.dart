@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:prayer_time_application/constants.dart';
-import 'package:prayer_time_application/providers/main_model.dart';
 import 'package:prayer_time_application/screens/fast_tracker/widgets/utils.dart';
+import 'package:prayer_time_application/screens/prayer_tracker/widgets/prayers.dart';
 import 'package:prayer_time_application/services/database_services.dart';
-import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calendar extends StatefulWidget {
@@ -16,7 +15,7 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  late Map<DateTime, List<bool>> selectedEvents;
+  late Map<DateTime, List<Prayer>> selectedEvents;
   CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
@@ -28,7 +27,13 @@ class _CalendarState extends State<Calendar> {
 
   late String userid;
 
-  List<bool> isChecked = [false, false, false, false, false];
+  Map<String, bool> isChecked = {
+    'fajr': false,
+    'dhuhr': false,
+    'asr': false,
+    'maghrib': false,
+    'isha': false
+  };
 
   @override
   void initState() {
@@ -42,7 +47,7 @@ class _CalendarState extends State<Calendar> {
     return DateTime.parse(DateTime(dt.year, dt.month, dt.day).toString() + "Z");
   }
 
-  List<bool> _getEventsfromDay(DateTime date) {
+  List<Prayer> _getEventsfromDay(DateTime date) {
     return selectedEvents[date] ?? [];
   }
 
@@ -66,28 +71,46 @@ class _CalendarState extends State<Calendar> {
         ),
       ),
       body: StreamBuilder<Event>(
-          stream: ref.child("/$userid/fast_tracker/").onValue,
+          stream: ref.child("/$userid/prayer_tracker/").onValue,
           builder: (context, snapshot) {
             print(snapshot);
             if (snapshot.hasData) {
+              if (snapshot.requireData.snapshot.exists) {
+                snapshot.requireData.snapshot.value
+                    .cast<String, dynamic>()
+                    .forEach((dt, val) {
+                  DateTime zoDate = _converToZeroOffset(
+                      DateTime.parse(dt.toString() + " 00:00:00.000"));
+                  if (selectedEvents[zoDate] != null) {
+                    selectedEvents[zoDate] = [];
+                  }
+                  val.cast<String, dynamic>().forEach((name, vl) {
+                    if (selectedEvents[zoDate] == null) {
+                      selectedEvents[zoDate] = [];
+                    }
+                    selectedEvents[zoDate]!.add(Prayer(name: name));
+                  });
+                  print(val);
+                });
+                print(selectedEvents);
+                isChecked = {
+                  'fajr': false,
+                  'dhuhr': false,
+                  'asr': false,
+                  'maghrib': false,
+                  'isha': false
+                };
+                var snapData = snapshot.requireData.snapshot.value[
+                    "${selectedDay.year}-${selectedDay.month}-${selectedDay.day.toString().padLeft(2, '0')}"];
+                if (snapData != null) {
+                  snapData.cast<String, dynamic>().forEach((name, vl) {
+                    isChecked[name] = vl;
+                  });
+                }
+              }
               // print(snapshot.requireData.snapshot.value[
               //     "${selectedDay.day}-${selectedDay.month}-${selectedDay.year}"]);
-              // snapshot.requireData.snapshot.value
-              //     .cast<String, dynamic>()
-              //     .forEach((dt, val) {
-              //   print(_converToZeroOffset(
-              //       DateTime.parse(dt.toString() + " 00:00:00.000")));
-              //   if (selectedEvents[_converToZeroOffset(
-              //           DateTime.parse(dt.toString() + " 00:00:00.000"))] ==
-              //       null) {
-              //     selectedEvents[_converToZeroOffset(
-              //         DateTime.parse(dt.toString() + " 00:00:00.000"))] = [];
-              //   } else {
-              //     selectedEvents[_converToZeroOffset(
-              //             DateTime.parse(dt.toString() + " 00:00:00.000"))]!
-              //         .add(true);
-              //   }
-              // });
+
             }
             return Container(
               child: Column(
@@ -111,9 +134,6 @@ class _CalendarState extends State<Calendar> {
                         selectedDay = selectDay;
                         focusedDay = focusDay;
                       });
-                      print(DateTime(
-                          focusedDay.year, focusedDay.month, focusedDay.day));
-                      print(DateTime(kToday.year, kToday.month, kToday.day));
                     },
                     selectedDayPredicate: (DateTime date) {
                       return isSameDay(selectedDay, date);
@@ -127,16 +147,16 @@ class _CalendarState extends State<Calendar> {
                       selectedDecoration: BoxDecoration(
                         color: Colors.amber.shade200,
                         shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(25.0),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       todayDecoration: BoxDecoration(
                         color: color2,
                         shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(25.0),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       defaultDecoration: BoxDecoration(
                         shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(25.0),
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
                       weekendDecoration: BoxDecoration(
                         shape: BoxShape.rectangle,
@@ -173,103 +193,235 @@ class _CalendarState extends State<Calendar> {
                         weekdayStyle: TextStyle(color: Colors.white),
                         weekendStyle: TextStyle(color: Colors.white)),
                   ),
-                  // ..._getEventsfromDay(selectedDay).map(
-                  //   (Event event) => ListTile(
-                  //     title: Text(
-                  //       event.title,
-                  //       style: TextStyle(color: color2),
-                  //     ),
-                  //   ),
-                  // ),
                   Expanded(
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                      Card(
-                        child: ListTile(
-                          tileColor: color1,
-                          title: Text('Fajr', style: TextStyle(color: color2, fontSize: 22),),
-                          trailing: GFCheckbox(
-                            size: GFSize.SMALL,
-                            activeBgColor: color2,
-                            onChanged: (value) {
-                              setState(() {
-                                isChecked[0] = value;
-                              });
-                            },
-                            value: isChecked[0],
-                            inactiveIcon: null,
+                          Card(
+                            child: ListTile(
+                              tileColor: color1,
+                              title: Text(
+                                'Fajr',
+                                style: TextStyle(color: color2, fontSize: 22),
+                              ),
+                              trailing: GFCheckbox(
+                                size: GFSize.SMALL,
+                                activeBgColor: color2,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isChecked['fajr'] = value;
+                                    if (isChecked['fajr'] == true) {
+                                      dbs.addPrayer(
+                                          selectedDay.day,
+                                          selectedDay.month,
+                                          selectedDay.year,
+                                          'fajr');
+                                      if (selectedEvents[selectedDay] != null) {
+                                        selectedEvents[selectedDay]!
+                                            .add(Prayer(name: 'fajr'));
+                                        print(selectedEvents);
+                                      } else {
+                                        selectedEvents[selectedDay] = [
+                                          Prayer(name: 'fajr')
+                                        ];
+                                        print(selectedEvents);
+                                      }
+                                    } else {
+                                      dbs.removePrayer(
+                                          selectedDay.day,
+                                          selectedDay.month,
+                                          selectedDay.year,
+                                          'fajr');
+                                      selectedEvents[selectedDay]!.removeLast();
+                                      print(selectedEvents);
+                                    }
+                                  });
+                                },
+                                value: isChecked['fajr']!,
+                                inactiveIcon: null,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                          tileColor: color1,
-                          title: Text('Dhuhr', style: TextStyle(color: color2, fontSize: 22),),
-                          trailing: GFCheckbox(
-                            size: GFSize.SMALL,
-                            activeBgColor: color2,
-                            onChanged: (value) {
-                              setState(() {
-                                isChecked[1] = value;
-                              });
-                            },
-                            value: isChecked[1],
-                            inactiveIcon: null,
+                          Card(
+                            child: ListTile(
+                              tileColor: color1,
+                              title: Text(
+                                'Dhuhr',
+                                style: TextStyle(color: color2, fontSize: 22),
+                              ),
+                              trailing: GFCheckbox(
+                                size: GFSize.SMALL,
+                                activeBgColor: color2,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isChecked['dhuhr'] = value;
+                                    if (isChecked['dhuhr'] == true) {
+                                      dbs.addPrayer(
+                                          selectedDay.day,
+                                          selectedDay.month,
+                                          selectedDay.year,
+                                          'dhuhr');
+                                      if (selectedEvents[selectedDay] != null) {
+                                        selectedEvents[selectedDay]!
+                                            .add(Prayer(name: 'dhuhr'));
+                                        print(selectedEvents);
+                                      } else {
+                                        selectedEvents[selectedDay] = [
+                                          Prayer(name: 'dhuhr')
+                                        ];
+                                        print(selectedEvents);
+                                      }
+                                    } else {
+                                      dbs.removePrayer(
+                                          selectedDay.day,
+                                          selectedDay.month,
+                                          selectedDay.year,
+                                          'dhuhr');
+                                      selectedEvents[selectedDay]!.removeLast();
+                                      print(selectedEvents);
+                                    }
+                                  });
+                                },
+                                value: isChecked['dhuhr']!,
+                                inactiveIcon: null,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                          tileColor: color1,
-                          title: Text('Asr', style: TextStyle(color: color2, fontSize: 22),),
-                          trailing: GFCheckbox(
-                            size: GFSize.SMALL,
-                            activeBgColor: color2,
-                            onChanged: (value) {
-                              setState(() {
-                                isChecked[2] = value;
-                              });
-                            },
-                            value: isChecked[2],
-                            inactiveIcon: null,
+                          Card(
+                            child: ListTile(
+                              tileColor: color1,
+                              title: Text(
+                                'Asr',
+                                style: TextStyle(color: color2, fontSize: 22),
+                              ),
+                              trailing: GFCheckbox(
+                                size: GFSize.SMALL,
+                                activeBgColor: color2,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isChecked['asr'] = value;
+                                    if (isChecked['asr'] == true) {
+                                      dbs.addPrayer(
+                                          selectedDay.day,
+                                          selectedDay.month,
+                                          selectedDay.year,
+                                          'asr');
+                                      if (selectedEvents[selectedDay] != null) {
+                                        selectedEvents[selectedDay]!
+                                            .add(Prayer(name: 'asr'));
+                                        print(selectedEvents);
+                                      } else {
+                                        selectedEvents[selectedDay] = [
+                                          Prayer(name: 'asr')
+                                        ];
+                                        print(selectedEvents);
+                                      }
+                                    } else {
+                                      dbs.removePrayer(
+                                          selectedDay.day,
+                                          selectedDay.month,
+                                          selectedDay.year,
+                                          'asr');
+                                      selectedEvents[selectedDay]!.removeLast();
+                                      print(selectedEvents);
+                                    }
+                                  });
+                                },
+                                value: isChecked['asr']!,
+                                inactiveIcon: null,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                          tileColor: color1,
-                          title: Text('Maghrib', style: TextStyle(color: color2, fontSize: 22),),
-                          trailing: GFCheckbox(
-                            size: GFSize.SMALL,
-                            activeBgColor: color2,
-                            onChanged: (value) {
-                              setState(() {
-                                isChecked[3] = value;
-                              });
-                            },
-                            value: isChecked[3],
-                            inactiveIcon: null,
+                          Card(
+                            child: ListTile(
+                              tileColor: color1,
+                              title: Text(
+                                'Maghrib',
+                                style: TextStyle(color: color2, fontSize: 22),
+                              ),
+                              trailing: GFCheckbox(
+                                size: GFSize.SMALL,
+                                activeBgColor: color2,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isChecked['maghrib'] = value;
+                                    if (isChecked['maghrib'] == true) {
+                                      dbs.addPrayer(
+                                          selectedDay.day,
+                                          selectedDay.month,
+                                          selectedDay.year,
+                                          'maghrib');
+                                      if (selectedEvents[selectedDay] != null) {
+                                        selectedEvents[selectedDay]!
+                                            .add(Prayer(name: 'maghrib'));
+                                        print(selectedEvents);
+                                      } else {
+                                        selectedEvents[selectedDay] = [
+                                          Prayer(name: 'maghrib')
+                                        ];
+                                        print(selectedEvents);
+                                      }
+                                    } else {
+                                      dbs.removePrayer(
+                                          selectedDay.day,
+                                          selectedDay.month,
+                                          selectedDay.year,
+                                          'maghrib');
+                                      selectedEvents[selectedDay]!.removeLast();
+                                      print(selectedEvents);
+                                    }
+                                  });
+                                },
+                                value: isChecked['maghrib']!,
+                                inactiveIcon: null,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      Card(
-                        child: ListTile(
-                          tileColor: color1,
-                          title: Text('Isha', style: TextStyle(color: color2, fontSize: 22),),
-                          trailing: GFCheckbox(
-                            size: GFSize.SMALL,
-                            activeBgColor: color2,
-                            onChanged: (value) {
-                              setState(() {
-                                isChecked[4] = value;
-                              });
-                            },
-                            value: isChecked[4],
-                            inactiveIcon: null,
-                          ),
-                        ),
-                      )
+                          Card(
+                            child: ListTile(
+                              tileColor: color1,
+                              title: Text(
+                                'Isha',
+                                style: TextStyle(color: color2, fontSize: 22),
+                              ),
+                              trailing: GFCheckbox(
+                                size: GFSize.SMALL,
+                                activeBgColor: color2,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isChecked['isha'] = value;
+                                    if (isChecked['isha'] == true) {
+                                      dbs.addPrayer(
+                                          selectedDay.day,
+                                          selectedDay.month,
+                                          selectedDay.year,
+                                          'isha');
+                                      if (selectedEvents[selectedDay] != null) {
+                                        selectedEvents[selectedDay]!
+                                            .add(Prayer(name: 'isha'));
+                                        print(selectedEvents);
+                                      } else {
+                                        selectedEvents[selectedDay] = [
+                                          Prayer(name: 'isha')
+                                        ];
+                                        print(selectedEvents);
+                                      }
+                                    } else {
+                                      dbs.removePrayer(
+                                          selectedDay.day,
+                                          selectedDay.month,
+                                          selectedDay.year,
+                                          'isha');
+                                      selectedEvents[selectedDay]!.removeLast();
+                                      print(selectedEvents);
+                                    }
+                                  });
+                                },
+                                value: isChecked['isha']!,
+                                inactiveIcon: null,
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
