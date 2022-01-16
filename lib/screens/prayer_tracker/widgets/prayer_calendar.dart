@@ -93,13 +93,7 @@ class _CalendarState extends State<Calendar> {
                   print(val);
                 });
                 print(selectedEvents);
-                isChecked = {
-                  'fajr': false,
-                  'dhuhr': false,
-                  'asr': false,
-                  'maghrib': false,
-                  'isha': false
-                };
+
                 var snapData = snapshot.requireData.snapshot.value[
                     "${selectedDay.year}-${selectedDay.month}-${selectedDay.day.toString().padLeft(2, '0')}"];
                 if (snapData != null) {

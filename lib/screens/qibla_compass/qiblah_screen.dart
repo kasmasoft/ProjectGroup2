@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
+import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/screens/qibla_compass/widgets/qibla_compass.dart';
 
 class QiblahCompassScreen extends StatefulWidget {
@@ -16,6 +17,17 @@ class _QiblahCompassState extends State<QiblahCompassScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: color2, //change your color here
+          ),
+          backgroundColor: color1,
+          centerTitle: true,
+          title: Text(
+            "Qiblah Compass",
+            style: TextStyle(color: color2),
+          ),
+        ),
       body: FutureBuilder(
         future: _deviceSupport,
         builder: (context, snapshot) {

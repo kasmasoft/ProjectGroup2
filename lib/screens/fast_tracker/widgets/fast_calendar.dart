@@ -71,8 +71,6 @@ class _CalendarState extends State<Calendar> {
           builder: (context, snapshot) {
             print(snapshot);
             if (snapshot.hasData) {
-              // print(snapshot.requireData.snapshot.value[
-              //     "${selectedDay.day}-${selectedDay.month}-${selectedDay.year}"]);
               if(snapshot.requireData.snapshot.exists){
                 snapshot.requireData.snapshot.value
                   .cast<String, dynamic>()
@@ -104,9 +102,6 @@ class _CalendarState extends State<Calendar> {
                         selectedDay = selectDay;
                         focusedDay = focusDay;
                       });
-                      print(DateTime(
-                          focusedDay.year, focusedDay.month, focusedDay.day));
-                      print(DateTime(kToday.year, kToday.month, kToday.day));
                     },
                     selectedDayPredicate: (DateTime date) {
                       return isSameDay(selectedDay, date);
@@ -229,7 +224,7 @@ class _CalendarState extends State<Calendar> {
                                 selectedDay.year);
                             print(selectedEvents);
                           }
-                          setState(() {});
+                          
                         },
                       ),
                     ),

@@ -24,7 +24,7 @@ class CustomeIcon extends StatelessWidget {
               Icon(
                 _icon,
                 color: color2,
-                size: 50.0,
+                size: 45.0,
               ),
               SizedBox(
                 height: 10.0,
@@ -33,8 +33,7 @@ class CustomeIcon extends StatelessWidget {
                 _title,
                 style: TextStyle(
                     color: color2,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18.0),
+                    fontSize: 16.0),
               ),
               SizedBox(
                 height: 5.0,

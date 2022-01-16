@@ -60,6 +60,8 @@
             <action android:name="android.intent.action.BOOT_COMPLETED"></action>
         </intent-filter>
         </receiver>
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyBVH-CjhhEsKA7I4wvv2b3bQvONuk0WTEE"/>
     </application>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 </manifest>

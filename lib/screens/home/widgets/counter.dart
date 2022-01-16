@@ -75,7 +75,7 @@ class _NextCounterState extends State<NextCounter> {
 
     return Consumer<NotificationModel>(
       builder: (context, obj, child) {
-        if (duration!.inSeconds == 0) {
+        if (duration!.inSeconds == 1) {
           LocalNotificationService.scheduleNotification(obj.currentPrayer, 'mumbai');
           print(obj.currentPrayer);
           print(obj.getToggleIndex());
@@ -94,7 +94,7 @@ class _NextCounterState extends State<NextCounter> {
         return Text(
           hours + ":" + minutes + ":" + seconds,
           style: TextStyle(
-            fontSize: 24,
+            fontSize: 20,
             fontWeight: FontWeight.w700,
             color: color2,
           ),
@@ -106,7 +106,7 @@ class _NextCounterState extends State<NextCounter> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: 10),
+      padding: EdgeInsets.only(right: 4),
       child: Column(
         children: [
           Text(

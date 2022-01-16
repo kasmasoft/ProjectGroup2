@@ -1,14 +1,16 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/screens/profile/profile.dart';
+import 'package:prayer_time_application/screens/settings/widgets/prayer_time_settings.dart';
 import 'package:prayer_time_application/screens/splash/splash_screen.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
-  static String routeName = "/settings";
+  static String routeName = "/setting";
 
   @override
   _SettingPageState createState() => _SettingPageState();
@@ -40,7 +42,7 @@ class _SettingPageState extends State<SettingPage> {
           backgroundColor: color1,
           centerTitle: true,
           title: Text(
-            "Setting",
+            "Settings",
             style: TextStyle(color: color2),
           ),
         ),
@@ -87,6 +89,35 @@ class _SettingPageState extends State<SettingPage> {
             padding: EdgeInsets.all(10),
             child: Column(
               children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, PrayerTimeSettings.routeName);
+                  },
+                  style: ElevatedButton.styleFrom(primary: color1),
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          'Prayer Times',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: color2,
+                          ),
+                        ),
+                        FaIcon(
+                          FontAwesomeIcons.clock,
+                          color: color2,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(primary: color1),

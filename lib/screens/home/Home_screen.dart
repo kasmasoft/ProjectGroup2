@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/helpers/prayerTimes.dart';
 import 'package:prayer_time_application/screens/fast_tracker/fast_tracker.dart';
+import 'package:prayer_time_application/screens/halal_food/halal_food.dart';
 import 'package:prayer_time_application/screens/home/widgets/counter.dart';
 import 'package:prayer_time_application/screens/home/widgets/current_date.dart';
 import 'package:prayer_time_application/screens/home/widgets/my_location.dart';
@@ -57,7 +58,7 @@ class _HomeState extends State<Home> {
                       child: NextPrayer(_nextPrayer)),
                   LocationScreen(),
                   Container(
-                    padding: EdgeInsets.only(top: 40),
+                    padding: EdgeInsets.only(top: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -82,7 +83,11 @@ class _HomeState extends State<Home> {
                         Navigator.pushNamed(context, MosqueScreen.routeName);
                       },
                       child: CustomeIcon(Icons.search, 'Mosque Search')),
-                  CustomeIcon(Icons.food_bank, 'Halal Food Search'),
+                  GestureDetector(
+                    onTap : (){
+                      Navigator.pushNamed(context, HalalFoodSearch.routeName);
+                    },
+                    child: CustomeIcon(Icons.food_bank, 'Halal Food Search')),
                   GestureDetector(
                       onTap: () => {
                             Navigator.pushNamed(context, Prayers.routeName),

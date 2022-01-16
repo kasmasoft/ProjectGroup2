@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:prayer_time_application/constants.dart';
+import 'package:prayer_time_application/providers/application_bloc.dart';
 import 'package:prayer_time_application/providers/auth_provider.dart';
 import 'package:prayer_time_application/providers/main_model.dart';
 import 'package:prayer_time_application/providers/notification_model.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => MainModel()),
           ChangeNotifierProvider(create: (context) => NotificationModel()),
           ChangeNotifierProvider(create: (context) => AuthProvider()),
+          ChangeNotifierProvider(create: (context) => ApplicationBloc()),
         ],
         child: Consumer<AuthProvider>(
           builder: (context, obj, child) {

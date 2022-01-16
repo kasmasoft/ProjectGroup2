@@ -13,3 +13,7 @@ final Color color3 = Color(0xFF011F14);
 
 
 final letterspacing = 1.2;
+
+
+final String loadingText = "Couldn't Get Your Location!";
+final String waiting = "Waiting for Your Location...";
