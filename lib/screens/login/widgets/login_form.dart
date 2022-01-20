@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/net/flutterfire.dart';
 import 'package:prayer_time_application/screens/forgot/forgot_password.dart';
@@ -32,9 +34,9 @@ class _LoginFormState extends State<LoginForm> {
                 decoration: new InputDecoration(
                   border: new OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: color2, width: 2.0)),
+                      borderSide: BorderSide(color: color2, width: 2.0)),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: color2, width: 2.0)),
+                      borderSide: BorderSide(color: color2, width: 2.0)),
                   labelText: 'Email',
                   labelStyle: TextStyle(color: color2),
                 ),
@@ -49,9 +51,9 @@ class _LoginFormState extends State<LoginForm> {
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: color2, width: 2.0)),
+                      borderSide: BorderSide(color: color2, width: 2.0)),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: color2, width: 2.0)),
+                      borderSide: BorderSide(color: color2, width: 2.0)),
                   labelText: 'Password',
                   labelStyle: TextStyle(color: color2),
                 ),
@@ -63,8 +65,7 @@ class _LoginFormState extends State<LoginForm> {
               },
               child: Text(
                 'Forgot Password?',
-                style: TextStyle(
-                    fontSize: 15, color: color2),
+                style: TextStyle(fontSize: 15, color: color2),
               ),
             ),
             SizedBox(
@@ -78,7 +79,7 @@ class _LoginFormState extends State<LoginForm> {
                   child: TextButton(
                     style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
+                          borderRadius: BorderRadius.circular(20)),
                       primary: Colors.white,
                       backgroundColor: color2,
                     ),
@@ -100,21 +101,42 @@ class _LoginFormState extends State<LoginForm> {
             Container(
                 child: Row(
               children: <Widget>[
-                Text('Don\'t have an account?', style: TextStyle(
-                        fontSize: 15, color: color2),),
+                Text(
+                  'Don\'t have an account?',
+                  style: TextStyle(fontSize: 15, color: color2),
+                ),
                 TextButton(
                   child: Text(
                     'SignUp',
-                    style: TextStyle(
-                        fontSize: 15, color: Colors.white),
+                    style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
                   onPressed: () {
                     Navigator.pushNamed(context, RegisterScreen.routeName);
                   },
-                )
+                ),
               ],
               mainAxisAlignment: MainAxisAlignment.center,
-            ))
+            )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GFButton(
+                  onPressed: () {},
+                  text: "Facebook",
+                  icon: Icon(Icons.facebook),
+                  shape: GFButtonShape.pills,
+                ),
+                SizedBox(width: 5.0,),
+            GFButton(
+                  onPressed: () {},
+                  text: "Google",
+                  icon: FaIcon(
+                          FontAwesomeIcons.google,
+                        ),
+                  shape: GFButtonShape.pills,
+                ),
+              ]
+            )
           ],
         ));
   }

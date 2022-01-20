@@ -54,7 +54,7 @@ class _HomeState extends State<Home> {
                 child: Column(children: [
                   SettingButton(),
                   Padding(
-                      padding: EdgeInsets.only(top: 90),
+                      padding: EdgeInsets.only(top: 120),
                       child: NextPrayer(_nextPrayer)),
                   LocationScreen(),
                   Container(

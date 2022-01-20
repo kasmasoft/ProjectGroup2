@@ -20,8 +20,8 @@ class MosqueScreen extends StatefulWidget {
 
 class _MosqueScreenState extends State<MosqueScreen> {
   Completer<GoogleMapController> _mapController = Completer();
-  StreamSubscription? locationSubscription;
-  StreamSubscription? boundsSubscription;
+  // StreamSubscription? locationSubscription;
+  // StreamSubscription? boundsSubscription;
   final _locationController = TextEditingController();
   
   @override
@@ -31,18 +31,18 @@ class _MosqueScreenState extends State<MosqueScreen> {
 
 
     //Listen for selected Location
-    locationSubscription = applicationBloc.selectedLocation.stream.listen((place) {
-      if (place != null) {
-        _locationController.text = place.name;
-        _goToPlace(place);
-      } else
-        _locationController.text = "";
-    });
+    // locationSubscription = applicationBloc.selectedLocation.stream.listen((place) {
+    //   if (place != null) {
+    //     _locationController.text = place.name;
+    //     _goToPlace(place);
+    //   } else
+    //     _locationController.text = "";
+    // });
 
-    applicationBloc.bounds.stream.listen((bounds) async {
-      final GoogleMapController controller = await _mapController.future;
-      controller.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
-    });
+    // applicationBloc.bounds.stream.listen((bounds) async {
+    //   final GoogleMapController controller = await _mapController.future;
+    //   controller.animateCamera(CameraUpdate.newLatLngBounds(bounds, 100));
+    // });
     super.initState();
   }
 
@@ -52,8 +52,8 @@ class _MosqueScreenState extends State<MosqueScreen> {
         Provider.of<ApplicationBloc>(context, listen: false);
     applicationBloc.dispose();
     _locationController.dispose();
-    locationSubscription?.cancel();
-    boundsSubscription?.cancel();
+    // locationSubscription?.cancel();
+    // boundsSubscription?.cancel();
     super.dispose();
   }
 
@@ -86,7 +86,7 @@ class _MosqueScreenState extends State<MosqueScreen> {
                       ),
                     ),
                   Container(
-                      margin: EdgeInsets.symmetric(vertical: 30),
+                      margin: EdgeInsets.all(20),
                       padding:
                           EdgeInsets.symmetric(horizontal: 35, vertical: 5),
                       decoration: BoxDecoration(
@@ -114,6 +114,7 @@ class _MosqueScreenState extends State<MosqueScreen> {
                   Stack(
                     children: [
                       Container(
+                        padding: EdgeInsets.all(10.0),
                         height: 400.0,
                         child: GoogleMap(
                           mapType: MapType.normal,

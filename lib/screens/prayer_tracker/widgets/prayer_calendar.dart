@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:prayer_time_application/constants.dart';
-import 'package:prayer_time_application/screens/fast_tracker/widgets/utils.dart';
+import 'package:prayer_time_application/screens/prayer_tracker/widgets/utils.dart';
 import 'package:prayer_time_application/screens/prayer_tracker/widgets/prayers.dart';
 import 'package:prayer_time_application/services/database_services.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -51,6 +51,16 @@ class _CalendarState extends State<Calendar> {
     return selectedEvents[date] ?? [];
   }
 
+  void clearIsChecked() {
+    isChecked = {
+      'fajr': false,
+      'dhuhr': false,
+      'asr': false,
+      'maghrib': false,
+      'isha': false
+    };
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -93,10 +103,13 @@ class _CalendarState extends State<Calendar> {
                   print(val);
                 });
                 print(selectedEvents);
-
+                clearIsChecked();
                 var snapData = snapshot.requireData.snapshot.value[
-                    "${selectedDay.year}-${selectedDay.month}-${selectedDay.day.toString().padLeft(2, '0')}"];
+                    "${selectedDay.year}-${selectedDay.month.toString().padLeft(2, '0')}-${selectedDay.day.toString().padLeft(2, '0')}"];
+                print(snapData);
+                print("${selectedDay.year}-${selectedDay.month.toString().padLeft(2, '0')}-${selectedDay.day.toString().padLeft(2, '0')}");
                 if (snapData != null) {
+                  print("read me 2");
                   snapData.cast<String, dynamic>().forEach((name, vl) {
                     isChecked[name] = vl;
                   });

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:prayer_time_application/constants.dart';
+import 'package:prayer_time_application/screens/login/login_screen.dart';
 import 'package:prayer_time_application/screens/profile/profile.dart';
 import 'package:prayer_time_application/screens/settings/widgets/prayer_time_settings.dart';
 import 'package:prayer_time_application/screens/splash/splash_screen.dart';
@@ -23,18 +24,18 @@ class _SettingPageState extends State<SettingPage> {
   bool valueFour = false;
   final FirebaseAuth auth = FirebaseAuth.instance;
   String? username;
-  User? user;
+  User? cuser;
 
   @override
   void initState() {
-    user = auth.currentUser;
-    username = user!.email;
+    cuser = auth.currentUser;
+    username = cuser!.email;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return cuser != null ? Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
             color: color2, //change your color here
@@ -231,7 +232,6 @@ class _SettingPageState extends State<SettingPage> {
                         desc: 'Are you sure you want to Signout',
                         btnCancelOnPress: () {},
                         btnOkOnPress: () {
-                          final FirebaseAuth auth = FirebaseAuth.instance;
                           auth.signOut();
                           Navigator.pushNamed(context, SplashScreen.routeName);
                           return;
@@ -263,6 +263,6 @@ class _SettingPageState extends State<SettingPage> {
               ],
             ),
           ),
-        ]))));
+        ])))): LoginScreen();
   }
 }

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "98700167044",
+    "firebase_url": "https://prayer-time-app-c67dc-default-rtdb.firebaseio.com",
     "project_id": "prayer-time-app-c67dc",
     "storage_bucket": "prayer-time-app-c67dc.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "98700167044-5quarbqsaqvpfgqta9r1oh99kk6ne73p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.prayer_time_application",
+            "certificate_hash": "d4d2d7ab58eb5406e591b9d6c9cbd9db320cd247"
+          }
+        },
         {
           "client_id": "98700167044-43q7r3124e7njckhj3dep0nr3mgkg0qk.apps.googleusercontent.com",
           "client_type": 3
