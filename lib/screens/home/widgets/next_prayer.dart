@@ -26,7 +26,7 @@ class _NextPrayerState extends State<NextPrayer> {
       child: Column(
         children: [
           Text(
-            widget.nextPrayer.toString().capitalize(),
+            widget.nextPrayer.toString() == 'none'? "Fajr(tomorrow)":widget.nextPrayer.toString().capitalize(),
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w400,
@@ -35,10 +35,10 @@ class _NextPrayerState extends State<NextPrayer> {
             ),
           ),
           Text(
-            _prayers[widget.nextPrayer].toString(),
+            widget.nextPrayer.toString() == 'none'? "Not available":_prayers[widget.nextPrayer].toString(),
             style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
                 color: color2
               ),
           ),

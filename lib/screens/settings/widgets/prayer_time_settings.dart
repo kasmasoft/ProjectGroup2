@@ -58,7 +58,7 @@ class _PrayerTimeSettingsState extends State<PrayerTimeSettings> {
             });
           },
           items: [
-            DropdownMenuItem(child: Text("hanafi"), value: Madhab.hanafi),
+            DropdownMenuItem(child: Text("Hanafi"), value: Madhab.hanafi),
             DropdownMenuItem(child: Text("Shafi"), value: Madhab.shafi)
           ],
         ),

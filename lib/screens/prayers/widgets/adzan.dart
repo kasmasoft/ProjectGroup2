@@ -1,12 +1,10 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
-import 'package:adhan/adhan.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/helpers/app_preference.dart';
 import 'package:prayer_time_application/helpers/extensions.dart';
 // import 'package:prayer_time_application/helpers/notifications.dart';
-import 'package:prayer_time_application/helpers/prayerTimes.dart';
 import 'package:prayer_time_application/helpers/prayer_times.dart';
 import 'package:prayer_time_application/providers/notification_model.dart';
 import 'package:provider/provider.dart';

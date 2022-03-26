@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/helpers/local_notification_services.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:audioplayers/audio_cache.dart';
+// import 'package:audioplayers/audio_cache.dart'; -----------TODO--------------
 
 import 'package:prayer_time_application/helpers/prayerTimes.dart';
 import 'package:prayer_time_application/providers/notification_model.dart';
@@ -23,7 +23,7 @@ class NextCounter extends StatefulWidget {
 class _NextCounterState extends State<NextCounter> {
   Duration? duration;
   Timer? timer;
-  final player = AudioCache();
+  // final player = AudioCache();
 
   @override
   void initState() {
@@ -76,19 +76,20 @@ class _NextCounterState extends State<NextCounter> {
     return Consumer<NotificationModel>(
       builder: (context, obj, child) {
         if (duration!.inSeconds == 1) {
-          LocalNotificationService.scheduleNotification(obj.currentPrayer, 'mumbai');
+          LocalNotificationService.scheduleNotification(
+              obj.currentPrayer, 'mumbai');
           print(obj.currentPrayer);
           print(obj.getToggleIndex());
           if (obj.getToggleIndex() == 0) {
             print(obj.currentPrayer);
-            player.play('audios/azaan.mp3', isNotification: true);
-            player.clear('audios/azaan.mp3');
+            // player.play('audios/azaan.mp3', isNotification: true);
+            // player.clear('audios/azaan.mp3');
           } else if (obj.getToggleIndex() == 1) {
             print('vibrate');
             vibrate();
           } else if (obj.getToggleIndex() == 2) {
-            player.play('audios/beep.mp3', isNotification: true);
-            player.clear('audios/beep.mp3');
+            // player.play('audios/beep.mp3', isNotification: true);
+            // player.clear('audios/beep.mp3');
           }
         }
         return Text(
@@ -110,7 +111,9 @@ class _NextCounterState extends State<NextCounter> {
       child: Column(
         children: [
           Text(
-            widget.nextPrayer + ' starts in',
+            widget.nextPrayer.toString() == 'none'
+                ? "Next day starts in"
+                : widget.nextPrayer + ' starts in',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w300,

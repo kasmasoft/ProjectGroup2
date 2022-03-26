@@ -85,8 +85,10 @@ class _MosqueScreenState extends State<MosqueScreen> {
                         fit: BoxFit.contain,
                       ),
                     ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
                   Container(
-                      margin: EdgeInsets.all(20),
                       padding:
                           EdgeInsets.symmetric(horizontal: 35, vertical: 5),
                       decoration: BoxDecoration(
@@ -111,10 +113,12 @@ class _MosqueScreenState extends State<MosqueScreen> {
                         ),
                       ),
                     ),
+                 SizedBox(
+                    height: 30.0,
+                  ), 
                   Stack(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(10.0),
                         height: 400.0,
                         child: GoogleMap(
                           mapType: MapType.normal,
@@ -161,66 +165,66 @@ class _MosqueScreenState extends State<MosqueScreen> {
                         ),
                     ],
                   ),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Find Nearest',
-                        style: TextStyle(
-                            color: Colors.white,fontSize: 25.0, fontWeight: FontWeight.bold)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Wrap(
-                      spacing: 8.0,
-                      children: [
-                        FilterChip(
-                          label: Text('Campground'),
-                          onSelected: (val) => applicationBloc.togglePlaceType(
-                              'campground', val),
-                          selected:
-                              applicationBloc.placeType  =='campground',
-                          selectedColor: Colors.blue,
-                        ),
-                        FilterChip(
-                            label: Text('Locksmith'),
-                            onSelected: (val) => applicationBloc
-                                .togglePlaceType('locksmith', val),
-                            selected: applicationBloc.placeType  =='locksmith',
-                            selectedColor: Colors.blue),
-                        FilterChip(
-                            label: Text('Pharmacy'),
-                            onSelected: (val) => applicationBloc
-                                .togglePlaceType('pharmacy', val),
-                            selected:
-                            applicationBloc.placeType  =='pharmacy',
-                            selectedColor: Colors.blue),
-                        FilterChip(
-                            label: Text('Pet Store'),
-                            onSelected: (val) => applicationBloc
-                                .togglePlaceType('pet_store', val),
-                            selected: applicationBloc.placeType  =='pet_store',
-                            selectedColor: Colors.blue),
-                        FilterChip(
-                            label: Text('Lawyer'),
-                            onSelected: (val) =>
-                                applicationBloc
-                                    .togglePlaceType('lawyer', val),
-                            selected:
-                            applicationBloc.placeType  =='lawyer',
-                            selectedColor: Colors.blue),
-                        FilterChip(
-                            label: Text('Bank'),
-                            onSelected: (val) =>
-                                applicationBloc
-                                    .togglePlaceType('bank', val),
-                            selected:
-                            applicationBloc.placeType  =='bank',
-                            selectedColor: Colors.blue),
-                      ],
-                    ),
-                  )
+                  // SizedBox(
+                  //   height: 20.0,
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: Text('Find Nearest',
+                  //       style: TextStyle(
+                  //           color: Colors.white,fontSize: 25.0, fontWeight: FontWeight.bold)),
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: Wrap(
+                  //     spacing: 8.0,
+                  //     children: [
+                  //       FilterChip(
+                  //         label: Text('Campground'),
+                  //         onSelected: (val) => applicationBloc.togglePlaceType(
+                  //             'campground', val),
+                  //         selected:
+                  //             applicationBloc.placeType  =='campground',
+                  //         selectedColor: Colors.blue,
+                  //       ),
+                  //       FilterChip(
+                  //           label: Text('Locksmith'),
+                  //           onSelected: (val) => applicationBloc
+                  //               .togglePlaceType('locksmith', val),
+                  //           selected: applicationBloc.placeType  =='locksmith',
+                  //           selectedColor: Colors.blue),
+                  //       FilterChip(
+                  //           label: Text('Pharmacy'),
+                  //           onSelected: (val) => applicationBloc
+                  //               .togglePlaceType('pharmacy', val),
+                  //           selected:
+                  //           applicationBloc.placeType  =='pharmacy',
+                  //           selectedColor: Colors.blue),
+                  //       FilterChip(
+                  //           label: Text('Pet Store'),
+                  //           onSelected: (val) => applicationBloc
+                  //               .togglePlaceType('pet_store', val),
+                  //           selected: applicationBloc.placeType  =='pet_store',
+                  //           selectedColor: Colors.blue),
+                  //       FilterChip(
+                  //           label: Text('Lawyer'),
+                  //           onSelected: (val) =>
+                  //               applicationBloc
+                  //                   .togglePlaceType('lawyer', val),
+                  //           selected:
+                  //           applicationBloc.placeType  =='lawyer',
+                  //           selectedColor: Colors.blue),
+                  //       FilterChip(
+                  //           label: Text('Bank'),
+                  //           onSelected: (val) =>
+                  //               applicationBloc
+                  //                   .togglePlaceType('bank', val),
+                  //           selected:
+                  //           applicationBloc.placeType  =='bank',
+                  //           selectedColor: Colors.blue),
+                  //     ],
+                  //   ),
+                  // )
                 ],
               ));
   }

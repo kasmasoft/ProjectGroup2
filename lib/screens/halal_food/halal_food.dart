@@ -18,8 +18,8 @@ class HalalFoodSearch extends StatefulWidget {
 
 class _HalalFoodSearchState extends State<HalalFoodSearch> {
   Completer<GoogleMapController> _mapController = Completer();
-  late StreamSubscription locationSubscription;
-  late StreamSubscription boundsSubscription;
+  // late StreamSubscription locationSubscription;
+  // late StreamSubscription boundsSubscription;
   final _locationController = TextEditingController();
 
   @override
@@ -27,20 +27,20 @@ class _HalalFoodSearchState extends State<HalalFoodSearch> {
     final applicationBloc =
         Provider.of<ApplicationBloc>(context, listen: false);
 
-    //Listen for selected Location
-    locationSubscription =
-        applicationBloc.selectedLocation.stream.listen((place) {
-      if (place != null) {
-        _locationController.text = place.name;
-        _goToPlace(place);
-      } else
-        _locationController.text = "";
-    });
+    // //Listen for selected Location
+    // locationSubscription =
+    //     applicationBloc.selectedLocation.stream.listen((place) {
+    //   if (place != null) {
+    //     _locationController.text = place.name;
+    //     _goToPlace(place);
+    //   } else
+    //     _locationController.text = "";
+    // });
 
-    applicationBloc.bounds.stream.listen((bounds) async {
-      final GoogleMapController controller = await _mapController.future;
-      controller.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
-    });
+    // applicationBloc.bounds.stream.listen((bounds) async {
+    //   final GoogleMapController controller = await _mapController.future;
+    //   controller.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50));
+    // });
     super.initState();
   }
 
@@ -50,8 +50,8 @@ class _HalalFoodSearchState extends State<HalalFoodSearch> {
         Provider.of<ApplicationBloc>(context, listen: false);
     applicationBloc.dispose();
     _locationController.dispose();
-    locationSubscription.cancel();
-    boundsSubscription.cancel();
+    // locationSubscription.cancel();
+    // boundsSubscription.cancel();
     super.dispose();
   }
 
@@ -112,23 +112,6 @@ class _HalalFoodSearchState extends State<HalalFoodSearch> {
                       ),
                     ),
                   ]),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: TextField(
-                  //     controller: _locationController,
-                  //     textCapitalization: TextCapitalization.words,
-                  //     decoration: InputDecoration(
-                  //       hintText: 'Search by City',
-                  //       suffixIcon: Icon(Icons.search),
-                  //       focusedBorder: OutlineInputBorder(
-                  //           borderSide: BorderSide(color: color2, width: 2.0)),
-                  //       enabledBorder: OutlineInputBorder(
-                  //           borderSide: BorderSide(color: color2, width: 2.0)),
-                  //     ),
-                  //     onChanged: (value) => applicationBloc.searchPlaces(value),
-                  //     onTap: () => applicationBloc.clearSelectedLocation(),
-                  //   ),
-                  // ),
                   Stack(
                     children: [
                       Container(
@@ -181,57 +164,6 @@ class _HalalFoodSearchState extends State<HalalFoodSearch> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: Text('Find Nearest',
-                  //       style: TextStyle(
-                  //           fontSize: 25.0, fontWeight: FontWeight.bold)),
-                  // ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: Wrap(
-                  //     spacing: 8.0,
-                  //     children: [
-                  //       FilterChip(
-                  //         label: Text('Campground'),
-                  //         onSelected: (val) => applicationBloc.togglePlaceType(
-                  //             'campground', val),
-                  //         selected: applicationBloc.placeType == 'campground',
-                  //         selectedColor: Colors.blue,
-                  //       ),
-                  //       FilterChip(
-                  //           label: Text('Locksmith'),
-                  //           onSelected: (val) => applicationBloc
-                  //               .togglePlaceType('locksmith', val),
-                  //           selected: applicationBloc.placeType == 'locksmith',
-                  //           selectedColor: Colors.blue),
-                  //       FilterChip(
-                  //           label: Text('Pharmacy'),
-                  //           onSelected: (val) => applicationBloc
-                  //               .togglePlaceType('pharmacy', val),
-                  //           selected: applicationBloc.placeType == 'pharmacy',
-                  //           selectedColor: Colors.blue),
-                  //       FilterChip(
-                  //           label: Text('Pet Store'),
-                  //           onSelected: (val) => applicationBloc
-                  //               .togglePlaceType('pet_store', val),
-                  //           selected: applicationBloc.placeType == 'pet_store',
-                  //           selectedColor: Colors.blue),
-                  //       FilterChip(
-                  //           label: Text('Lawyer'),
-                  //           onSelected: (val) =>
-                  //               applicationBloc.togglePlaceType('lawyer', val),
-                  //           selected: applicationBloc.placeType == 'lawyer',
-                  //           selectedColor: Colors.blue),
-                  //       FilterChip(
-                  //           label: Text('Bank'),
-                  //           onSelected: (val) =>
-                  //               applicationBloc.togglePlaceType('bank', val),
-                  //           selected: applicationBloc.placeType == 'bank',
-                  //           selectedColor: Colors.blue),
-                  //     ],
-                  //   ),
-                  // )
                 ],
               ));
   }

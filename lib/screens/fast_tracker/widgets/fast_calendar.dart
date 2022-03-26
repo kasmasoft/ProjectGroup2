@@ -153,9 +153,6 @@ class _CalendarState extends State<Calendar> {
                       ),
                     ),
                     daysOfWeekStyle: DaysOfWeekStyle(
-                        decoration: BoxDecoration(
-                          color: color2,
-                        ),
                         dowTextFormatter: (date, locale) =>
                             DateFormat.E(locale).format(date),
                         weekdayStyle: TextStyle(color: Colors.white),

@@ -11,7 +11,6 @@ import 'package:prayer_time_application/screens/settings/widgets/prayer_time_set
 import 'screens/forgot/forgot_password.dart';
 import 'screens/prayers/prayers.dart';
 import 'screens/profile/profile.dart';
-import 'screens/more/more.dart';
 import 'screens/register/register_screen.dart';
 import 'screens/login/login_screen.dart';
 
@@ -26,7 +25,6 @@ final Map<String, WidgetBuilder> routes = {
   Home.routeName: (context) => Home(),
   MosqueScreen.routeName: (context) => MosqueScreen(),
   QiblahCompassScreen.routeName: (context) => QiblahCompassScreen(),
-  More.routeName: (context) => More(),
   ForgotPassword.routeName: (context) => ForgotPassword(),
   Prayers.routeName: (context) => Prayers(),
   UserProfile.routeName: (context) => UserProfile(),

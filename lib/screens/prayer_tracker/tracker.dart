@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:prayer_time_application/screens/prayer_tracker/widgets/prayer_calendar.dart';
 

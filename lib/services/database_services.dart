@@ -12,10 +12,13 @@ class DatabaseServices {
   void initToggle(String userid) {
     List prayers = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
 
-    for (var prayer in prayers) {
+    // ignore: unnecessary_null_comparison
+    if (ref.child("/$userid/notification_setting").key == null){
+      for (var prayer in prayers) {
       var childRef =
           ref.child("/$userid/notification_setting/$prayer" + "_index/");
       childRef.set(0);
+      }
     }
   }
 

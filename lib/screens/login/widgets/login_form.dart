@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:prayer_time_application/constants.dart';
 import 'package:prayer_time_application/net/flutterfire.dart';
 import 'package:prayer_time_application/screens/forgot/forgot_password.dart';
-import 'package:prayer_time_application/screens/home/Home_Screen.dart';
 import 'package:prayer_time_application/screens/register/register_screen.dart';
+import 'package:prayer_time_application/services/database_services.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key? key}) : super(key: key);
@@ -91,8 +89,10 @@ class _LoginFormState extends State<LoginForm> {
                           password: passwordController.text,
                           context: context,
                         );
+                        print(user);
                         if (user != null) {
-                          Navigator.pushNamed(context, Home.routeName);
+                          Navigator.pushNamedAndRemoveUntil(context, "/home",
+                              (Route<dynamic> route) => false);
                         }
                       }
                     },
@@ -117,26 +117,107 @@ class _LoginFormState extends State<LoginForm> {
               ],
               mainAxisAlignment: MainAxisAlignment.center,
             )),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GFButton(
-                  onPressed: () {},
-                  text: "Facebook",
-                  icon: Icon(Icons.facebook),
-                  shape: GFButtonShape.pills,
+            Row(children: <Widget>[
+              Expanded(
+                child: Divider(
+                  color: Colors.white,
                 ),
-                SizedBox(width: 5.0,),
-            GFButton(
-                  onPressed: () {},
-                  text: "Google",
-                  icon: FaIcon(
-                          FontAwesomeIcons.google,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "OR",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              Expanded(
+                  child: Divider(
+                color: Colors.white,
+              )),
+            ]),
+            SizedBox(
+              height: 10.0,
+            ),
+            // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            //   InkWell(
+            //     onTap: () async {
+            //       User? user =
+            //           await FireAuth.signInWithGoogle(context: context);
+            //       if (user != null) {
+            //         DatabaseServices db = DatabaseServices();
+            //         db.initToggle(user.uid);
+            //         Navigator.pushNamedAndRemoveUntil(
+            //             context, "/home", (Route<dynamic> route) => false);
+            //       }
+            //     },
+            //     child: Ink(
+            //       color: Color(0xFF397AF3),
+            //       child: Padding(
+            //         padding: EdgeInsets.all(8),
+            //         child: Wrap(
+            //           crossAxisAlignment: WrapCrossAlignment.center,
+            //           children: [
+            //             Image.asset(
+            //               "assets/images/google.jpg",
+            //               width: 35,
+            //               height: 35,
+            //             ),
+            //             SizedBox(width: 12),
+            //             Text(
+            //               'Sign in with Google',
+            //               style: TextStyle(color: Colors.white, fontSize: 18),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ]),
+
+            OutlinedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.white),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40),
+                  ),
+                ),
+              ),
+              onPressed: () async {
+                User? user =
+                      await FireAuth.signInWithGoogle(context: context);
+                  if (user != null) {
+                    DatabaseServices db = DatabaseServices();
+                    db.initToggle(user.uid);
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, "/home", (Route<dynamic> route) => false);
+                  }
+              },
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Image(
+                      image: AssetImage("assets/images/google_logo.jpg"),
+                      height: 30.0,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Text(
+                        'Sign in with Google',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w600,
                         ),
-                  shape: GFButtonShape.pills,
+                      ),
+                    )
+                  ],
                 ),
-              ]
-            )
+              ),
+            ),
           ],
         ));
   }

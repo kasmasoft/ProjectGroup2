@@ -17,7 +17,7 @@ class PrayerTimeHandler {
   CalculationMethod get method => _method;
   PrayerTimes? get prayerTimes => _prayerTimes;
   String get address => _address != null
-      ? '${_address!.locality}, ${_address!.subAdministrativeArea}, ${_address!.administrativeArea}'
+      ? '${_address!.subLocality}, ${_address!.subAdministrativeArea}, ${_address!.administrativeArea}'
       : '';
 
   Future<loc.LocationData?> getLocationData() async {

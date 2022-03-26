@@ -23,7 +23,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  late String _nextPrayer;
+  String? _nextPrayer;
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _HomeState extends State<Home> {
                       child: NextPrayer(_nextPrayer)),
                   LocationScreen(),
                   Container(
-                    padding: EdgeInsets.only(top: 30),
+                    padding: EdgeInsets.only(top: 35),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -80,6 +80,7 @@ class _HomeState extends State<Home> {
                 children: <Widget>[
                   GestureDetector(
                       onTap: () {
+                        print(_nextPrayer);
                         Navigator.pushNamed(context, MosqueScreen.routeName);
                       },
                       child: CustomeIcon(Icons.search, 'Mosque Search')),

@@ -21,13 +21,14 @@ class LoginScreen extends StatelessWidget {
                     height: 200,
                     alignment: Alignment.center,
                     padding: EdgeInsets.all(10),
-                    child: Text(
-                      'Prayer Time',
-                      style: TextStyle(
-                          color: color2,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 30),
-                    )
+                    child: // Text(
+                    //   'Musalla',
+                    //   style: TextStyle(
+                    //       color: color2,
+                    //       fontWeight: FontWeight.w500,
+                    //       fontSize: 30),
+                    // )
+                    Image.asset('assets/images/launcher.png'),
                   ),
                   LoginForm(),
                 ],

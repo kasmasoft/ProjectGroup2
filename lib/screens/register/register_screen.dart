@@ -181,7 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     password: passwordController.text,
                                   );
                                   if (user != null) {
-                                    Navigator.pushNamed(context, Home.routeName);
+                                    Navigator.pushNamedAndRemoveUntil(context, "/home", (Route<dynamic> route) => false);
                                   }
                                 }
                               },
